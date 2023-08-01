@@ -3,7 +3,7 @@ import { ref, type PropType, type Ref, inject, onUnmounted, onMounted } from 'vu
 
 import TrackCard from '@/components/Cards/TrackCard.vue'
 import Button from '@/components/Buttons/Button.vue'
-import type { Track } from '@/types/types'
+import type { Track } from '@/types/SearchTypes'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
 defineProps({

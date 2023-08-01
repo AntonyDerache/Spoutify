@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 
 import { getRecommendations } from '@/api/getRecommendations'
 import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { Track } from '@/types/types'
+import type { Track } from '@/types/SearchTypes'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
 const tracks: Ref<Array<Track>> = ref([])

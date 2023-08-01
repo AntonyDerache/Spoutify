@@ -13,6 +13,7 @@ defineEmits(['update:value'])
     :value="value"
     @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
     :placeholder="placeholder"
+    autocomplete="on"
   />
 </template>
 

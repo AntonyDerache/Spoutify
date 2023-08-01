@@ -15,8 +15,8 @@ defineProps({
 
 <style scoped lang="scss">
 .play-button {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   border: 1px solid var(--primary-color);
   background-color: var(--primary-color);

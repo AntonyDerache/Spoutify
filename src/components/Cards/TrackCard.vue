@@ -3,7 +3,7 @@ import { ref, type PropType, computed, inject } from 'vue'
 
 import IconButton from '@/components/Buttons/IconButton.vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
-import type { Track } from '@/types/types'
+import type { Track } from '@/types/SearchTypes'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
 const props = defineProps({
@@ -37,11 +37,9 @@ const pauseTrack = () => {
     <div class="pt-4 text-start w-full flex flex-col items-center">
       <div class="py-2">
         <div class="flex gap-2">
-          <PlayButton
-            v-if="track.preview_url"
-            :isPlaying="isPlaying"
-            @click="isPlaying ? pauseTrack() : playTrack()"
-          />
+          <div v-if="track.preview_url" class="play-button">
+            <PlayButton :isPlaying="isPlaying" @click="isPlaying ? pauseTrack() : playTrack()" />
+          </div>
           <a :href="track.uri">
             <IconButton icon="fa-brands fa-spotify" size="md" iconSize="xl" />
           </a>
@@ -64,6 +62,11 @@ const pauseTrack = () => {
   border-radius: var(--border-radius-xl);
   transition: 0.2s ease-in-out;
   padding: 2rem;
+
+  .play-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 
   p {
     width: 12rem;
