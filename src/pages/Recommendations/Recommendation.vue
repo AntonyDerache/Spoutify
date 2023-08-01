@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref, type Ref } from "vue";
-import { useRoute } from 'vue-router';
+import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { useRoute } from 'vue-router'
 
-import { getRecommendations } from "@/api/getRecommendations";
-import TrackCard from "@/components/Cards/TrackCard.vue";
-import type { Track } from "@/types/types";
-import type { IAudioManager } from "@/Tools/AudioManager";
+import { getRecommendations } from '@/api/getRecommendations'
+import TrackCard from '@/components/Cards/TrackCard.vue'
+import type { Track } from '@/types/types'
+import type { IAudioManager } from '@/Tools/AudioManager'
 
-const tracks: Ref<Array<Track>> = ref([]);
-let currentUrlTrackPlaying: Ref<string> = ref("");
-const audioManager: IAudioManager | undefined = inject("audioManager");
+const tracks: Ref<Array<Track>> = ref([])
+let currentUrlTrackPlaying: Ref<string> = ref('')
+const audioManager: IAudioManager | undefined = inject('audioManager')
 
 onMounted(async () => {
-  const genre = ref(useRoute().params.genre);
-  const response: { tracks: Array<Track> } = await getRecommendations("genres", (genre.value as string));
-  tracks.value = response.tracks;
+  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
+  const genre = ref(useRoute().params.genre)
+  const response: { tracks: Array<Track> } = await getRecommendations(
+    'genres',
+    genre.value as string
+  )
+  tracks.value = response.tracks
 })
 
 const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl;
+  currentUrlTrackPlaying.value = trackUrl
 }
 
 onUnmounted(() => {
-  audioManager?.pauseAudio();
+  audioManager?.pauseAudio()
+  audioManager?.setOnEndedCallback(() => {})
 })
 </script>
 

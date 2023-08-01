@@ -1,14 +1,14 @@
 <script setup lang="ts">
 defineProps({
-  isPlaying: Boolean,
+  isPlaying: Boolean
 })
 </script>
 
 <template>
   <div class="play-button cursor-pointer mx-auto">
     <button class="logo">
-      <font-awesome-icon v-if="isPlaying" icon="pause" size="lg"/>
-      <font-awesome-icon class="play" v-else icon="play" size="lg"/>
+      <font-awesome-icon v-if="isPlaying" icon="pause" size="lg" />
+      <font-awesome-icon class="play" v-else icon="play" size="lg" />
     </button>
   </div>
 </template>
@@ -45,7 +45,7 @@ defineProps({
     border-color: var(--primary-color);
     background-color: transparent;
     color: var(--primary-color);
-    transition: .1s ease-in-out;
+    transition: 0.1s ease-in-out;
   }
 }
 </style>

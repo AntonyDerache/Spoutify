@@ -1,43 +1,43 @@
 export type CurrentTrackPlaying = {
-  preview_url: string,
-  id: String,
+  preview_url: string
+  id: String
 }
 
 export type Track = {
-  preview_url: string | null,
-  id: string,
-  name: string,
-  uri: string,
-  album: Album,
+  preview_url: string | null
+  id: string
+  name: string
+  uri: string
+  album: Album
   artists: Array<Artist>
 }
 
 export type Album = {
-  id: string,
-  images: Array<Image>,
-  name: string,
+  id: string
+  images: Array<Image>
+  name: string
 }
 
 export type Image = {
-  url: string,
-  height: number,
-  width: number,
+  url: string
+  height: number
+  width: number
 }
 
 export type Artist = {
-  id: string,
-  name: string,
-  images: Array<Image>,
+  id: string
+  name: string
+  images: Array<Image>
 }
 
 export type SearchItems = {
   tracks: {
-    items: Array<Track>,
-  },
+    items: Array<Track>
+  }
   albums: {
-    items: Array<Album>,
+    items: Array<Album>
   }
   artists: {
-    items: Array<Artist>,
+    items: Array<Artist>
   }
 }

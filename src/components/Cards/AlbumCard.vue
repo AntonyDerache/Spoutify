@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps({
   name: String,
-  coverURL: String,
+  coverURL: String
 })
 </script>
 
 <template>
   <div class="album-card flex flex-col gap-4 cursor-pointer">
-    <img :src="coverURL" :alt="`${name} album cover`"/>
+    <img :src="coverURL" :alt="`${name} album cover`" />
     <p>{{ name }}</p>
   </div>
 </template>

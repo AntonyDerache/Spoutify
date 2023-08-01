@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
+import type { PropType } from 'vue'
 
-import AlbumCard from '@/components/Cards/AlbumCard.vue';
-import type { Album } from "@/types/types";
+import AlbumCard from '@/components/Cards/AlbumCard.vue'
+import type { Album } from '@/types/types'
 
 defineProps({
-  albums: { type: Object as PropType<Array<Album>>, required: true },
+  albums: { type: Object as PropType<Array<Album>>, required: true }
 })
 </script>
 

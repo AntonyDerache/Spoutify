@@ -1,9 +1,9 @@
 export const buildQueryParameters = (params: object) => {
-  let toConcatUrl = "?";
+  let toConcatUrl = '?'
 
   Object.entries(params).forEach(([key, value]) => {
-    toConcatUrl = toConcatUrl.concat(`${key}=${value}`);
-    toConcatUrl = toConcatUrl.concat('&');
+    toConcatUrl = toConcatUrl.concat(`${key}=${value}`)
+    toConcatUrl = toConcatUrl.concat('&')
   })
-  return toConcatUrl.slice(0, -1);
+  return toConcatUrl.slice(0, -1)
 }

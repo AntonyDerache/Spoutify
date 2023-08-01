@@ -19,7 +19,7 @@ a {
 }
 
 .padding-section {
-  transition: .15s ease-in-out;
+  transition: 0.15s ease-in-out;
   padding: 0 1.5rem;
 
   @media (min-width: 1280px) {

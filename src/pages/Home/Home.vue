@@ -1,39 +1,44 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue';
+import { ref, watch, type Ref } from 'vue'
 
-import Input from "@/components/Input/Input.vue";
-import Button from "@/components/Buttons/Button.vue";
-import { searchItem } from '@/api/searchItem';
-import type { SearchItems } from '@/types/types';
-import ArtistsList from '@/pages/Home/ArtistsList.vue';
-import AlbumsList from '@/pages/Home/AlbumsList.vue';
-import TracksList from '@/pages/Home/TracksList.vue';
+import Input from '@/components/Input/Input.vue'
+import Button from '@/components/Buttons/Button.vue'
+import { searchItem } from '@/api/searchItem'
+import type { SearchItems } from '@/types/types'
+import ArtistsList from '@/pages/Home/ArtistsList.vue'
+import AlbumsList from '@/pages/Home/AlbumsList.vue'
+import TracksList from '@/pages/Home/TracksList.vue'
 
-const inputValue = ref("");
-let searchResults: Ref<SearchItems | null> = ref(null);
+const inputValue = ref('')
+let searchResults: Ref<SearchItems | null> = ref(null)
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
-    searchResults.value = null;
+    searchResults.value = null
   }
   if (newV !== '') {
-    const result = await searchItem(newV, ["artist", "track", "album"]);
-    searchResults.value = result;
+    const result = await searchItem(newV, ['artist', 'track', 'album'])
+    searchResults.value = result
   }
 })
 </script>
 
 <template>
   <section
-    :class="`flex gap-6 justify-center items-center flex-col padding-section ${inputValue === '' ? 'section-centered' : ''}`">
+    :class="`flex gap-6 justify-center items-center flex-col padding-section ${
+      inputValue === '' ? 'section-centered' : ''
+    }`"
+  >
     <div class="input-container">
       <Input v-model:value="inputValue" placeholder="Rechercher" />
     </div>
     <div class="flex gap-4 w-full h-full justify-center items-center">
-      <p class="text-md">
-        Find your new style in the recommendations!
-      </p>
-      <Button label="Recommendations" size="sm" @click="() => $router.push('/recommendations')"></Button>
+      <p class="text-md">Find your new style in the recommendations!</p>
+      <Button
+        label="Recommendations"
+        size="sm"
+        @click="() => $router.push('/recommendations')"
+      ></Button>
     </div>
     <div v-if="searchResults && inputValue.length > 0" class="w-full flex flex-col gap-6">
       <ArtistsList :artists="searchResults.artists.items" />
@@ -47,11 +52,6 @@ watch(inputValue, async (newV, oldV) => {
 .section-centered {
   padding-top: 0;
   transform: translateY(calc(100vh / 2 - 50%));
-  transition: .15s ease-in-out;
-}
-
-.artist-frame {
-  width: 12rem;
-  height: 12rem;
+  transition: 0.15s ease-in-out;
 }
 </style>

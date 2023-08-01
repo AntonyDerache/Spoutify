@@ -3,15 +3,14 @@ const props = defineProps({
   icon: String,
   size: { type: String, default: 'md' },
   iconSize: { type: String, default: 'lg' },
-  onClick: Function,
+  onClick: Function
 })
 
 const handleClick = () => {
   if (props.onClick) {
-    props.onClick();
+    props.onClick()
   }
 }
-
 </script>
 
 <template>
@@ -25,7 +24,7 @@ button {
   border: 1px solid transparent;
   border-radius: 100%;
   color: var(--secondary-color);
-  transition: .1s ease-in-out;
+  transition: 0.1s ease-in-out;
   background-color: var(--primary-color);
 
   &.sm {
@@ -52,7 +51,7 @@ button {
     border-color: var(--primary-color);
     background-color: transparent;
     color: var(--primary-color);
-    transition: .1s ease-in-out;
+    transition: 0.1s ease-in-out;
   }
 }
 </style>

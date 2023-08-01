@@ -2,15 +2,21 @@
 defineProps({
   label: String,
   icon: String,
-  onRemove: Function,
+  onRemove: Function
 })
 </script>
 
 <template>
   <span :class="`badge flex items-center ${onRemove ? 'padding-xl' : ''}`">
     <p v-if="label" class="font-bold uppercase">{{ label }}</p>
-    <font-awesome-icon v-if="icon" class="cursor-pointer" size="lg" :icon="icon"/>
-    <font-awesome-icon v-if="onRemove" class="icon" icon="xmark" size="lg" @click="() => onRemove ? onRemove(label) : null" />
+    <font-awesome-icon v-if="icon" class="cursor-pointer" size="lg" :icon="icon" />
+    <font-awesome-icon
+      v-if="onRemove"
+      class="icon"
+      icon="xmark"
+      size="lg"
+      @click="() => (onRemove ? onRemove(label) : null)"
+    />
   </span>
 </template>
 
@@ -37,10 +43,10 @@ defineProps({
   .icon {
     position: absolute;
     right: 10px;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
 
     &:hover {
-      transition: .2s ease-in-out;
+      transition: 0.2s ease-in-out;
       transform: rotate(90deg);
     }
   }

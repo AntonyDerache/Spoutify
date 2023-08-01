@@ -2,7 +2,7 @@
 defineProps({
   value: String,
   label: String,
-  placeholder: String,
+  placeholder: String
 })
 defineEmits(['update:value'])
 </script>
@@ -19,18 +19,18 @@ defineEmits(['update:value'])
 <style lang="scss" scoped>
 input {
   background-color: transparent;
-  border: 1px solid rgb(112, 112, 112, .5);
+  border: 1px solid rgb(112, 112, 112, 0.5);
   border-radius: var(--border-radius-lg);
   color: white;
   padding: 0 1.5rem;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   width: 100%;
   height: 100%;
 
   &:hover {
     border-color: transparent;
     background-color: rgba(149, 149, 149, 0.2);
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 
   &:focus {

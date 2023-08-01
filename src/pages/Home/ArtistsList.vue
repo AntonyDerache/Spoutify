@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
+import type { PropType } from 'vue'
 
-import ArtistPhoto from "@/components/ArtistsPhoto/ArtistsPhoto.vue"
-import type { Artist } from "@/types/types";
+import ArtistPhoto from '@/components/ArtistsPhoto/ArtistsPhoto.vue'
+import type { Artist } from '@/types/types'
 
 defineProps({
-  artists: { type: Object as PropType<Array<Artist>>, required: true },
+  artists: { type: Object as PropType<Array<Artist>>, required: true }
 })
 </script>
 
@@ -16,7 +16,7 @@ defineProps({
       <ArtistPhoto :name="item.name" :img="item.images[1]?.url"></ArtistPhoto>
     </div>
   </div>
-  <div class="flex justify-center ">
+  <div class="flex justify-center">
     <Button label="View more..."></Button>
   </div>
 </template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import Header from "@/layout/Header.vue";
+import Header from '@/layout/Header.vue'
 </script>
 
 <template>
-  <Header/>
+  <Header />
   <div id="app-content">
-    <RouterView class="padding-header"/>
+    <RouterView class="padding-header" />
   </div>
 </template>
 
