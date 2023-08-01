@@ -2,6 +2,7 @@
 import type { PropType } from 'vue'
 
 import AlbumCard from '@/components/Cards/AlbumCard.vue'
+import Button from '@/components/Buttons/Button.vue'
 import type { Album } from '@/types/types'
 
 defineProps({

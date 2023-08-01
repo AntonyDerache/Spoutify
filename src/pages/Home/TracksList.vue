@@ -2,6 +2,7 @@
 import { ref, type PropType, type Ref, inject, onUnmounted, onMounted } from 'vue'
 
 import TrackCard from '@/components/Cards/TrackCard.vue'
+import Button from '@/components/Buttons/Button.vue'
 import type { Track } from '@/types/types'
 import type { IAudioManager } from '@/Tools/AudioManager'
 

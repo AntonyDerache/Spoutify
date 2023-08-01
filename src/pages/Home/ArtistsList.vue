@@ -2,6 +2,7 @@
 import type { PropType } from 'vue'
 
 import ArtistPhoto from '@/components/ArtistsPhoto/ArtistsPhoto.vue'
+import Button from '@/components/Buttons/Button.vue'
 import type { Artist } from '@/types/types'
 
 defineProps({
@@ -11,7 +12,7 @@ defineProps({
 
 <template>
   <p class="text-4xl font-bold p-4">Artists</p>
-  <div class="w-full flex pb-5">
+  <div class="flex flex-wrap gap-2 ">
     <div v-for="item in artists.slice(0, 5)" :key="item.name" class="artist-frame">
       <ArtistPhoto :name="item.name" :img="item.images[1]?.url"></ArtistPhoto>
     </div>
