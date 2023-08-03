@@ -22,7 +22,7 @@ defineProps({
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: rgb(black, .3);
+  background-color: rgb(black, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;

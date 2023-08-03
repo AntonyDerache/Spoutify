@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { computed, inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { getArtists, getArtistsAlbums, getArtistsTopTracks } from '@/api/getArtists'
@@ -15,6 +15,13 @@ const artist: Ref<SearchArtist | undefined> = ref(undefined)
 const artistTopTracks: Ref<ArtistTracks | undefined> = ref(undefined)
 const artistAlbums: Ref<ArtistAlbums | undefined> = ref(undefined)
 let currentUrlTrackPlaying: Ref<string> = ref('')
+
+let singlesList = computed(() =>
+  artistAlbums.value?.items.filter((album) => album.album_type === 'single')
+)
+let albumsList = computed(() =>
+  artistAlbums.value?.items.filter((album) => album.album_type === 'album')
+)
 
 onMounted(async () => {
   audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
@@ -32,7 +39,6 @@ const getArtist = async (artistId: string) => {
 const getArtistTopTracks = async (artistId: string) => {
   const result = await getArtistsTopTracks(artistId)
   artistTopTracks.value = result
-  console.log(result.tracks)
 }
 
 const getArtistAlbums = async (artistId: string) => {
@@ -84,7 +90,10 @@ const displayLargeNumber = (number: number) => {
           <ArtistsTopTracks :tracks="artistTopTracks.tracks" />
         </div>
         <div v-if="artistAlbums">
-          <ArtistsAlbums :albums="artistAlbums.items" />
+          <div class="flex flex-col gap-10">
+            <ArtistsAlbums v-if="albumsList" :albums="albumsList" />
+            <ArtistsAlbums v-if="singlesList" :albums="singlesList" />
+          </div>
         </div>
       </div>
     </div>

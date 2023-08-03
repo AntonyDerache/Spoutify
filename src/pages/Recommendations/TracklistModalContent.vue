@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchTrack } from '@/types/Search.types';
+import type { SearchTrack } from '@/types/Search.types'
 
 defineProps({
   currentTrackIndex: Number,

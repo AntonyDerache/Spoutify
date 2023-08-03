@@ -10,8 +10,8 @@ import type { SearchTrack } from '@/types/Search.types'
 import TracklistModalContent from './TracklistModalContent.vue'
 
 const tracks: Ref<Array<SearchTrack>> = ref([])
-let isTracklistModalOpen: Ref<boolean> = ref(false);
-let currentTrackIndex: Ref<number> = ref(0);
+let isTracklistModalOpen: Ref<boolean> = ref(false)
+let currentTrackIndex: Ref<number> = ref(0)
 
 onMounted(async () => {
   const genre = ref(useRoute().params.genre)
@@ -23,7 +23,7 @@ onMounted(async () => {
 })
 
 const closeTracklistModal = () => {
-  isTracklistModalOpen.value = false;
+  isTracklistModalOpen.value = false
 }
 
 const openTracklistModal = () => {
@@ -31,21 +31,20 @@ const openTracklistModal = () => {
 }
 
 const onNewTrackSelected = (index: number) => {
-  currentTrackIndex.value = index;
+  currentTrackIndex.value = index
 }
 </script>
 
 <template>
   <section>
     <Modal :isOpen="isTracklistModalOpen" :onClose="closeTracklistModal">
-      <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex"/>
+      <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex" />
     </Modal>
     <div class="flex justify-center pt-10">
-      <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal"/>
+      <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal" />
     </div>
     <TracksListing :tracks="tracks" @newTrackSelected="onNewTrackSelected" />
   </section>
 </template>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

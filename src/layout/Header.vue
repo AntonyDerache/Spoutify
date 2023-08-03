@@ -14,7 +14,6 @@ import logo from '../assets/logo.svg'
       </div>
       <nav class="flex w-full justify-end items-center gap-16 pl-10">
         <p @click="() => $router.push('/recommendations')">Recommendations</p>
-        <!-- <p>Find item</p> -->
       </nav>
     </div>
   </header>

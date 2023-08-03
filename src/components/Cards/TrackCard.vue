@@ -15,18 +15,20 @@ const props = defineProps({
 const audioManager: IAudioManager | undefined = inject('audioManager')
 let isPlaying = ref(false)
 
-isPlaying = computed(() => props.currentUrlTrackPlaying === props.track.preview_url)
+isPlaying = computed(() => {
+  return props.currentUrlTrackPlaying === props.track.preview_url
+})
 
 const playTrack = () => {
   if (!props.track.preview_url || !props.setCurrentUrlTrackPlaying) {
     return
   }
-  audioManager?.setSrc(props.track.preview_url)
   props.setCurrentUrlTrackPlaying(props.track.preview_url)
+  audioManager?.setSrc(props.track.preview_url)
 }
 
 const pauseTrack = () => {
-   if (!props.setCurrentUrlTrackPlaying) {
+  if (!props.setCurrentUrlTrackPlaying) {
     return
   }
   audioManager?.pauseAudio()
