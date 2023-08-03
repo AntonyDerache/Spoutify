@@ -45,7 +45,7 @@ onUnmounted(() => {
     class="p-2 cursor-pointer text-violet-400 hover:text-violet-200 transition-all"
     @click="() => (showMore = !showMore)"
   >
-    {{ showMore ? "See less" : "See more"}}
+    {{ showMore ? 'See less' : 'See more' }}
   </p>
 </template>
 
