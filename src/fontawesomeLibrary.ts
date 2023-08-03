@@ -4,8 +4,18 @@ import {
   faPlay,
   faPause,
   faPaperPlane,
-  faArrowUpRightFromSquare
+  faArrowUpRightFromSquare,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons'
+import {} from '@fortawesome/free-regular-svg-icons'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faPlay, faXmark, faPause, faPaperPlane, faArrowUpRightFromSquare, faSpotify)
+library.add(
+  faPlay,
+  faXmark,
+  faPause,
+  faPaperPlane,
+  faArrowUpRightFromSquare,
+  faSpotify,
+  faArrowLeft
+)

@@ -4,17 +4,17 @@ import { useRoute } from 'vue-router'
 
 import { getRecommendations } from '@/api/getRecommendations'
 import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { Track } from '@/types/SearchTypes'
+import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
-const tracks: Ref<Array<Track>> = ref([])
+const tracks: Ref<Array<SearchTrack>> = ref([])
 let currentUrlTrackPlaying: Ref<string> = ref('')
 const audioManager: IAudioManager | undefined = inject('audioManager')
 
 onMounted(async () => {
   audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
   const genre = ref(useRoute().params.genre)
-  const response: { tracks: Array<Track> } = await getRecommendations(
+  const response: { tracks: Array<SearchTrack> } = await getRecommendations(
     'genres',
     genre.value as string
   )

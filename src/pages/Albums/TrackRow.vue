@@ -2,11 +2,14 @@
 import { inject, ref, type PropType, computed } from 'vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import IconButton from '@/components/Buttons/IconButton.vue'
-import type { Track } from '@/types/AlbumTypes'
+import type { AlbumTrack } from './Album.types'
 import type { IAudioManager } from '@/Tools/AudioManager'
+import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
+import type { SearchTrack } from '@/types/Search.types'
 
 const props = defineProps({
-  track: { type: Object as PropType<Track>, required: true },
+  track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },
+  albumCover: String,
   currentUrlTrackPlaying: { type: String, required: true },
   setCurrentUrlTrackPlaying: { type: Function, required: true }
 })
@@ -28,27 +31,25 @@ const pauseTrack = () => {
   audioManager?.pauseAudio()
   props.setCurrentUrlTrackPlaying('')
 }
-
-function millisToMinutesAndSeconds(millis: number) {
-  const minutes: number = Math.floor(millis / 60000)
-  const seconds = Number.parseFloat(((millis % 60000) / 1000).toFixed(0))
-  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-}
 </script>
 
 <template>
-  <div class="flex justify-start items-center gap-4">
-    <div v-if="track.preview_url" class="play-button m-2">
-      <PlayButton :isPlaying="isPlaying" @click="isPlaying ? pauseTrack() : playTrack()" />
+  <div
+    class="flex items-center gap-4 justify-between"
+    @click="isPlaying ? pauseTrack() : playTrack()"
+  >
+    <div class="play-button m-2">
+      <PlayButton v-if="track.preview_url" :isPlaying="isPlaying" />
     </div>
-    <p :class="`${isPlaying ? 'color-primary' : ''}`">{{ track.name }}</p>
+    <img v-if="albumCover" :src="albumCover" :alt="`${track.name}'s album cover`" />
+    <p :class="`track-name ${isPlaying ? 'color-primary' : ''}`">{{ track.name }}</p>
   </div>
   <div class="flex gap-4 items-center">
     <a :href="track.uri">
       <IconButton class="spotify-button" icon="fa-brands fa-spotify" iconSize="lg" />
     </a>
     <p :class="`track-duration ${isPlaying ? 'color-primary' : ''}`">
-      {{ millisToMinutesAndSeconds(track.duration_ms) }}
+      {{ millisecondsToMinutesAndSeconds(track.duration_ms) }}
     </p>
   </div>
 </template>
@@ -58,6 +59,16 @@ function millisToMinutesAndSeconds(millis: number) {
 .spotify-button {
   width: 2rem !important;
   height: 2rem !important;
+}
+
+img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.track-name:hover {
+  cursor: pointer;
+  color: var(--primary-color);
 }
 
 p {

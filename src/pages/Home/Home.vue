@@ -4,7 +4,7 @@ import { ref, watch, type Ref } from 'vue'
 import Input from '@/components/Input/Input.vue'
 import Button from '@/components/Buttons/Button.vue'
 import { searchItem } from '@/api/searchItem'
-import type { SearchItems } from '@/types/SearchTypes'
+import type { SearchItems } from '@/types/Search.types'
 import ArtistsList from '@/pages/Home/ArtistsList.vue'
 import AlbumsList from '@/pages/Home/AlbumsList.vue'
 import TracksList from '@/pages/Home/TracksList.vue'
@@ -40,10 +40,19 @@ watch(inputValue, async (newV, oldV) => {
         @click="() => $router.push('/recommendations')"
       ></Button>
     </div>
-    <div v-if="searchResults && inputValue.length > 0" class="w-full flex flex-col gap-6">
-      <ArtistsList :artists="searchResults.artists.items" />
-      <AlbumsList :albums="searchResults.albums.items" />
-      <TracksList :tracks="searchResults.tracks.items" />
+    <div v-if="searchResults && inputValue.length > 0" class="flex flex-col gap-6">
+      <ArtistsList
+        v-if="searchResults.artists.items.length > 0"
+        :artists="searchResults.artists.items"
+      />
+      <AlbumsList
+        v-if="searchResults.albums.items.length > 0"
+        :albums="searchResults.albums.items"
+      />
+      <TracksList
+        v-if="searchResults.tracks.items.length > 0"
+        :tracks="searchResults.tracks.items"
+      />
     </div>
   </section>
 </template>

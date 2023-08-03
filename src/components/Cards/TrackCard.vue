@@ -3,11 +3,11 @@ import { ref, type PropType, computed, inject } from 'vue'
 
 import IconButton from '@/components/Buttons/IconButton.vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
-import type { Track } from '@/types/SearchTypes'
+import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
 const props = defineProps({
-  track: { type: Object as PropType<Track>, required: true },
+  track: { type: Object as PropType<SearchTrack>, required: true },
   currentUrlTrackPlaying: { type: String, required: true },
   setCurrentUrlTrackPlaying: { type: Function, required: true }
 })

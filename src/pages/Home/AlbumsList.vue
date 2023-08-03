@@ -3,10 +3,10 @@ import type { PropType } from 'vue'
 
 import AlbumCard from '@/components/Cards/AlbumCard.vue'
 import Button from '@/components/Buttons/Button.vue'
-import type { Album } from '@/types/SearchTypes'
+import type { SearchAlbum } from '@/types/Search.types'
 
 defineProps({
-  albums: { type: Object as PropType<Array<Album>>, required: true }
+  albums: { type: Object as PropType<Array<SearchAlbum>>, required: true }
 })
 </script>
 

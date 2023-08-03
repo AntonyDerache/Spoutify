@@ -3,18 +3,22 @@ import type { PropType } from 'vue'
 
 import ArtistPhoto from '@/components/ArtistsPhoto/ArtistsPhoto.vue'
 import Button from '@/components/Buttons/Button.vue'
-import type { Artist } from '@/types/SearchTypes'
+import type { SearchArtist } from '@/types/Search.types'
 
 defineProps({
-  artists: { type: Object as PropType<Array<Artist>>, required: true }
+  artists: { type: Object as PropType<Array<SearchArtist>>, required: true }
 })
 </script>
 
 <template>
   <p class="text-4xl font-bold p-4">Artists</p>
   <div class="flex flex-wrap gap-2">
-    <div v-for="item in artists.slice(0, 5)" :key="item.name" class="artist-frame">
-      <ArtistPhoto :name="item.name" :img="item.images[1]?.url"></ArtistPhoto>
+    <div v-for="artist in artists.slice(0, 5)" :key="artist.name" class="artist-frame">
+      <ArtistPhoto
+        :name="artist.name"
+        :img="artist.images[1]?.url"
+        @click="() => $router.push(`/artists/${artist.id}`)"
+      />
     </div>
   </div>
   <div class="flex justify-center">

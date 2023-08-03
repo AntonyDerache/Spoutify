@@ -3,11 +3,11 @@ import { ref, type PropType, type Ref, inject, onUnmounted, onMounted } from 'vu
 
 import TrackCard from '@/components/Cards/TrackCard.vue'
 import Button from '@/components/Buttons/Button.vue'
-import type { Track } from '@/types/SearchTypes'
+import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/Tools/AudioManager'
 
 defineProps({
-  tracks: { type: Object as PropType<Array<Track>>, required: true }
+  tracks: { type: Object as PropType<Array<SearchTrack>>, required: true }
 })
 
 let currentUrlTrackPlaying: Ref<string> = ref('')
