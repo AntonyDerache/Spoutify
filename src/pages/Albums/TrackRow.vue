@@ -78,8 +78,4 @@ p {
 .track-duration {
   width: 1.5rem;
 }
-
-.color-primary {
-  color: var(--primary-color);
-}
 </style>

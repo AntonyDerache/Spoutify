@@ -7,7 +7,7 @@ import { AudioManager } from '@/Tools/AudioManager'
 import './style/main.css'
 import './fontawesomeLibrary.ts'
 
-const audioManager = new AudioManager(window)
+const audioManager = new AudioManager()
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)

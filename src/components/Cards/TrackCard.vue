@@ -8,8 +8,8 @@ import type { IAudioManager } from '@/Tools/AudioManager'
 
 const props = defineProps({
   track: { type: Object as PropType<SearchTrack>, required: true },
-  currentUrlTrackPlaying: { type: String, required: true },
-  setCurrentUrlTrackPlaying: { type: Function, required: true }
+  currentUrlTrackPlaying: { type: String, required: false },
+  setCurrentUrlTrackPlaying: { type: Function, required: false }
 })
 
 const audioManager: IAudioManager | undefined = inject('audioManager')
@@ -18,7 +18,7 @@ let isPlaying = ref(false)
 isPlaying = computed(() => props.currentUrlTrackPlaying === props.track.preview_url)
 
 const playTrack = () => {
-  if (!props.track.preview_url) {
+  if (!props.track.preview_url || !props.setCurrentUrlTrackPlaying) {
     return
   }
   audioManager?.setSrc(props.track.preview_url)
@@ -26,14 +26,17 @@ const playTrack = () => {
 }
 
 const pauseTrack = () => {
+   if (!props.setCurrentUrlTrackPlaying) {
+    return
+  }
   audioManager?.pauseAudio()
   props.setCurrentUrlTrackPlaying('')
 }
 </script>
 
 <template>
-  <div class="track-card flex items-center flex-col">
-    <img :src="track.album.images[1]?.url" :alt="`${track.name} album cover`" />
+  <div class="track-card flex flex-col items-center justify-center">
+    <img :src="track.album?.images[1]?.url" :alt="`${track.name} album cover`" />
     <div class="pt-4 text-start w-full flex flex-col items-center">
       <div class="py-2">
         <div class="flex gap-2">
@@ -57,11 +60,12 @@ const pauseTrack = () => {
 
 <style scoped lang="scss">
 .track-card {
-  min-width: 12rem;
+  // min-width: 12rem;
   background-color: rgba(170, 124, 229, 0.3);
   border-radius: var(--border-radius-xl);
   transition: 0.2s ease-in-out;
   padding: 2rem;
+  height: 100%;
 
   .play-button {
     width: 2.5rem;

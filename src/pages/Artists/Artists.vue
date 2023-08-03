@@ -74,7 +74,7 @@ const displayLargeNumber = (number: number) => {
         <template v-slot:text>
           <div>
             <h1 class="text-5xl">{{ artist.name }}</h1>
-            <h3 class="text-xl">{{ displayLargeNumber(artist.followers.total) }} Followers</h3>
+            <h3 class="text-md">{{ displayLargeNumber(artist.followers.total) }} Followers</h3>
           </div>
         </template>
       </ItemPresentation>

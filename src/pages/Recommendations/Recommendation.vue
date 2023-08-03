@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+import Modal from '@/components/Modal/Modal.vue'
+import Button from '@/components/Buttons/Button.vue'
 import { getRecommendations } from '@/api/getRecommendations'
-import TrackCard from '@/components/Cards/TrackCard.vue'
+import TracksListing from '@/layout/TracksListing.vue'
 import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/Tools/AudioManager'
+import TracklistModalContent from './TracklistModalContent.vue'
 
 const tracks: Ref<Array<SearchTrack>> = ref([])
-let currentUrlTrackPlaying: Ref<string> = ref('')
-const audioManager: IAudioManager | undefined = inject('audioManager')
+let isTracklistModalOpen: Ref<boolean> = ref(false);
+let currentTrackIndex: Ref<number> = ref(0);
 
 onMounted(async () => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
   const genre = ref(useRoute().params.genre)
   const response: { tracks: Array<SearchTrack> } = await getRecommendations(
     'genres',
@@ -21,36 +22,30 @@ onMounted(async () => {
   tracks.value = response.tracks
 })
 
-const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
+const closeTracklistModal = () => {
+  isTracklistModalOpen.value = false;
 }
 
-onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
+const openTracklistModal = () => {
+  isTracklistModalOpen.value = true
+}
+
+const onNewTrackSelected = (index: number) => {
+  currentTrackIndex.value = index;
+}
 </script>
 
 <template>
   <section>
-    <ul class="w-full">
-      <li class="" v-for="(track, index) in tracks" :key="index">
-        <TrackCard
-          :track="track"
-          :currentUrlTrackPlaying="currentUrlTrackPlaying"
-          :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
-        />
-      </li>
-    </ul>
+    <Modal :isOpen="isTracklistModalOpen" :onClose="closeTracklistModal">
+      <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex"/>
+    </Modal>
+    <div class="flex justify-center pt-10">
+      <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal"/>
+    </div>
+    <TracksListing :tracks="tracks" @newTrackSelected="onNewTrackSelected" />
   </section>
 </template>
 
 <style scoped lang="scss">
-ul {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(210px, max-content));
-  grid-gap: 2.5rem;
-  justify-content: center;
-  padding: 2rem;
-}
 </style>

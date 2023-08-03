@@ -5,7 +5,8 @@ import {
   faPause,
   faPaperPlane,
   faArrowUpRightFromSquare,
-  faArrowLeft
+  faArrowLeft,
+  faArrowRight
 } from '@fortawesome/free-solid-svg-icons'
 import {} from '@fortawesome/free-regular-svg-icons'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
@@ -17,5 +18,6 @@ library.add(
   faPaperPlane,
   faArrowUpRightFromSquare,
   faSpotify,
-  faArrowLeft
+  faArrowLeft,
+  faArrowRight
 )
