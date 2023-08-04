@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { inject } from 'vue';
+import { inject } from 'vue'
 
-import { Device } from '@/tools/defineDevice';
+import { Device } from '@/tools/defineDevice'
 import logo from '../assets/logo.svg'
 
 let device: Device | undefined = inject('device')
@@ -14,11 +14,13 @@ let device: Device | undefined = inject('device')
         class="header-logo flex items-center text-white gap-3 cursor-pointer"
         v-on:click="() => $router.push('/')"
       >
-        <img  :src="logo" alt="logo-spoutify" />
+        <img :src="logo" alt="logo-spoutify" />
         <p v-if="device !== Device.Mobile" class="font-bold">Spoutify</p>
       </div>
       <nav class="flex w-full justify-end items-center gap-16 pl-10">
-        <p class="text-md md:text-base" @click="() => $router.push('/recommendations')">Recommendations</p>
+        <p class="text-md md:text-base" @click="() => $router.push('/recommendations')">
+          Recommendations
+        </p>
       </nav>
     </div>
   </header>

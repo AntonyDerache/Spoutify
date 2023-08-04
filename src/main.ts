@@ -9,7 +9,7 @@ import './style/main.css'
 import './fontawesomeLibrary.ts'
 
 const audioManager = new AudioManager()
-const device = defineDevice();
+const device = defineDevice()
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)

@@ -89,7 +89,6 @@ ul {
 
   @media (min-width: 320px) {
     grid-template-columns: auto auto;
-
   }
 
   @media (min-width: 768px) {

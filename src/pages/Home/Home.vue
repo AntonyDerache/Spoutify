@@ -34,8 +34,10 @@ watch(inputValue, async (newV, oldV) => {
     <div class="input-container">
       <Input v-model:value="inputValue" placeholder="Rechercher" />
     </div>
-    <div v-if="device === Device.Mobile && inputValue === ''"
-      class="flex gap-4 w-full h-full justify-center items-center flex-wrap text-center">
+    <div
+      v-if="device === Device.Mobile && inputValue === ''"
+      class="flex gap-4 w-full h-full justify-center items-center flex-wrap text-center"
+    >
       <p class="text-md">Find your new style in the recommendations!</p>
       <Button
         label="Recommendations"

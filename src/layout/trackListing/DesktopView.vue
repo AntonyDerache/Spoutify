@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue';
+import { inject, ref } from 'vue'
 
-import TrackCard from '@/components/Cards/TrackCard.vue';
-import type { IAudioManager } from '@/tools/AudioManager';
-import type { SearchTrack } from '@/types/Search.types';
+import TrackCard from '@/components/Cards/TrackCard.vue'
+import type { IAudioManager } from '@/tools/AudioManager'
+import type { SearchTrack } from '@/types/Search.types'
 
 const props = defineProps({
   tracks: { type: Array<SearchTrack>, required: true },
   currentUrlTrackPlaying: { type: String, required: true },
-  newTrackIsBeingPlay: { type: Function, required: true },
+  newTrackIsBeingPlay: { type: Function, required: true }
 })
 const emits = defineEmits(['newTrackSelected'])
 
@@ -66,7 +66,6 @@ const setAnimPrev = () => {
     emits('newTrackSelected', currentTrackIndex.value)
   }, 300)
 }
-
 </script>
 
 <template>
@@ -74,22 +73,39 @@ const setAnimPrev = () => {
     <span v-if="currentUrlTrackPlaying !== ''" class="background-play-lightning" />
     <div class="track-listing">
       <div class="direction-icon">
-        <font-awesome-icon v-if="currentTrackIndex > 0" icon="arrow-left" size="xl" @click="prevTrack"
-          class="cursor-pointer" />
+        <font-awesome-icon
+          v-if="currentTrackIndex > 0"
+          icon="arrow-left"
+          size="xl"
+          @click="prevTrack"
+          class="cursor-pointer"
+        />
       </div>
       <div id="left-ghost-track" class="ghost-track left">
         <TrackCard v-if="currentTrackIndex > 0" :track="tracks[currentTrackIndex - 1]" />
       </div>
       <div id="current-track" :class="`track ${audioManager?.isPlaying ? '' : ''}`">
-        <TrackCard v-if="tracks[currentTrackIndex]" :track="tracks[currentTrackIndex]"
-          :currentUrlTrackPlaying="currentUrlTrackPlaying" :setCurrentUrlTrackPlaying="newTrackIsBeingPlay" />
+        <TrackCard
+          v-if="tracks[currentTrackIndex]"
+          :track="tracks[currentTrackIndex]"
+          :currentUrlTrackPlaying="currentUrlTrackPlaying"
+          :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
+        />
       </div>
       <div id="right-ghost-track" class="ghost-track right">
-        <TrackCard v-if="currentTrackIndex < tracks.length - 1" :track="tracks[currentTrackIndex + 1]" />
+        <TrackCard
+          v-if="currentTrackIndex < tracks.length - 1"
+          :track="tracks[currentTrackIndex + 1]"
+        />
       </div>
       <div class="direction-icon">
-        <font-awesome-icon v-if="currentTrackIndex < tracks.length - 1" icon="arrow-right" size="xl" @click="nextTrack"
-          class="cursor-pointer" />
+        <font-awesome-icon
+          v-if="currentTrackIndex < tracks.length - 1"
+          icon="arrow-right"
+          size="xl"
+          @click="nextTrack"
+          class="cursor-pointer"
+        />
       </div>
     </div>
   </div>

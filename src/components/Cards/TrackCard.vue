@@ -91,7 +91,6 @@ const pauseTrack = () => {
     border-radius: var(--border-radius);
     width: 6rem;
     // height: 6rem;
-
   }
 }
 </style>

@@ -3,9 +3,9 @@ import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
 import type { IAudioManager } from '@/tools/AudioManager'
 import type { SearchTrack } from '@/types/Search.types'
-import { Device } from '@/tools/defineDevice';
-import MobileView from './MobileView.vue';
-import DesktopView from './DesktopView.vue';
+import { Device } from '@/tools/defineDevice'
+import MobileView from './MobileView.vue'
+import DesktopView from './DesktopView.vue'
 
 defineProps({
   tracks: { type: Array<SearchTrack>, required: true }
@@ -30,6 +30,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <DesktopView v-if="device !== Device.Mobile" :tracks="tracks" :currentUrlTrackPlaying="currentUrlTrackPlaying" :newTrackIsBeingPlay="newTrackIsBeingPlay"/>
-  <MobileView v-else :tracks="tracks" :currentUrlTrackPlaying="currentUrlTrackPlaying" :newTrackIsBeingPlay="newTrackIsBeingPlay" />
+  <DesktopView
+    v-if="device !== Device.Mobile"
+    :tracks="tracks"
+    :currentUrlTrackPlaying="currentUrlTrackPlaying"
+    :newTrackIsBeingPlay="newTrackIsBeingPlay"
+  />
+  <MobileView
+    v-else
+    :tracks="tracks"
+    :currentUrlTrackPlaying="currentUrlTrackPlaying"
+    :newTrackIsBeingPlay="newTrackIsBeingPlay"
+  />
 </template>
