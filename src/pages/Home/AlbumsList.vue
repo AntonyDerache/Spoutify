@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <p class="text-4xl font-bold p-4">Albums</p>
-  <div class="flex flex-wrap gap-5">
+  <div class="flex flex-wrap gap-5 justify-center md:justify-start">
     <div v-for="album in albums.slice(0, 5)" :key="album.name">
       <AlbumCard
         :name="album.name"
@@ -22,6 +22,6 @@ defineProps({
     </div>
   </div>
   <div class="flex justify-center">
-    <Button label="View more..."></Button>
+    <Button label="View more"></Button>
   </div>
 </template>

@@ -7,7 +7,7 @@ import IconButton from '@/components/Buttons/IconButton.vue'
 import Badge from '@/components/Badge/Badge.vue'
 import Card from '@/components/Cards/Card.vue'
 import genresData from '@/assets/genres.json'
-import { searchInAnArray } from '@/Tools/searchInAnArray'
+import { searchInAnArray } from '@/tools/searchInAnArray'
 
 const inputValue = ref('')
 const router = useRouter()
@@ -54,7 +54,7 @@ const goToRecommendations = () => {
     <div class="input-container">
       <Input v-model:value="inputValue" placeholder="Find a genre" />
     </div>
-    <div class="flex w-full pt-8 gap-4">
+    <div class="flex w-full py-4 md:py-8 gap-4 flex-wrap">
       <IconButton
         v-if="selectedGenres.length > 0"
         class="white-color"
@@ -73,7 +73,7 @@ const goToRecommendations = () => {
         <Card
           :label="genre"
           :isSelected="selectedGenres.includes(genre)"
-          v-on:click="() => selectGenre(genre)"
+          @click="() => selectGenre(genre)"
         />
       </li>
     </ul>
@@ -83,9 +83,23 @@ const goToRecommendations = () => {
 <style scoped>
 ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
-  grid-gap: 2.5rem;
-  padding: 2rem;
+  /* grid-template-columns: repeat(auto-fit, minmax(210px, max-content)); */
+  grid-template-columns: auto;
+  grid-gap: 2rem;
+
+  @media (min-width: 320px) {
+    grid-template-columns: auto auto;
+
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
+  }
+
+  @media (min-width: 1024px) {
+    grid-gap: 2.5rem;
+    padding: 1rem;
+  }
 }
 
 .white-color {

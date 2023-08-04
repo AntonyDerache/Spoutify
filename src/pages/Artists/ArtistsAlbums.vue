@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { SearchAlbum } from '@/types/Search.types'
 import { ref } from 'vue'
+
+import type { SearchAlbum } from '@/types/Search.types'
 
 defineProps({
   albums: { type: Array<SearchAlbum>, required: true }

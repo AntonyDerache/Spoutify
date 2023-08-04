@@ -4,7 +4,7 @@ import { ref, type PropType, computed, inject } from 'vue'
 import IconButton from '@/components/Buttons/IconButton.vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/Tools/AudioManager'
+import type { IAudioManager } from '@/tools/AudioManager'
 
 const props = defineProps({
   track: { type: Object as PropType<SearchTrack>, required: true },
@@ -62,12 +62,19 @@ const pauseTrack = () => {
 
 <style scoped lang="scss">
 .track-card {
-  // min-width: 12rem;
   background-color: rgba(170, 124, 229, 0.3);
   border-radius: var(--border-radius-xl);
   transition: 0.2s ease-in-out;
   padding: 2rem;
   height: 100%;
+  max-width: 16rem;
+  width: 75%;
+
+  @media (min-width: 768px) {
+    max-width: unset;
+    min-width: 12rem;
+    width: auto;
+  }
 
   .play-button {
     width: 2.5rem;
@@ -75,7 +82,7 @@ const pauseTrack = () => {
   }
 
   p {
-    width: 12rem;
+    width: 100%;
     word-wrap: break-word;
   }
 
@@ -83,7 +90,8 @@ const pauseTrack = () => {
     color: blue;
     border-radius: var(--border-radius);
     width: 6rem;
-    height: 6rem;
+    // height: 6rem;
+
   }
 }
 </style>

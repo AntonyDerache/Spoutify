@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 import Modal from '@/components/Modal/Modal.vue'
 import Button from '@/components/Buttons/Button.vue'
 import { getRecommendations } from '@/api/getRecommendations'
-import TracksListing from '@/layout/TracksListing.vue'
+import TracksListing from '@/layout/trackListing/TracksListing.vue'
 import type { SearchTrack } from '@/types/Search.types'
 import TracklistModalContent from './TracklistModalContent.vue'
 

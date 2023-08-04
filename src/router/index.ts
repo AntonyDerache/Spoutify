@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/pages/Home/Home.vue'
-import Recommendation from '@/pages/Recommendations/Recommendation.vue'
-import Recommendations from '@/pages/Recommendations/Recommendations.vue'
-import Albums from '@/pages/Albums/Albums.vue'
-import Artists from '@/pages/Artists/Artists.vue'
+
+import Home from '@/pages/home/Home.vue'
+import Recommendation from '@/pages/recommendations/Recommendation.vue'
+import Recommendations from '@/pages/recommendations/Recommendations.vue'
+import Albums from '@/pages/albums/Albums.vue'
+import Artists from '@/pages/artists/Artists.vue'
 
 const router = createRouter({
   history: createWebHistory(),

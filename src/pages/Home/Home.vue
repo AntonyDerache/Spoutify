@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue'
+import { ref, watch, type Ref, inject } from 'vue'
 
 import Input from '@/components/Input/Input.vue'
 import Button from '@/components/Buttons/Button.vue'
@@ -8,9 +8,11 @@ import type { SearchItems } from '@/types/Search.types'
 import ArtistsList from '@/pages/Home/ArtistsList.vue'
 import AlbumsList from '@/pages/Home/AlbumsList.vue'
 import TracksList from '@/pages/Home/TracksList.vue'
+import { Device } from '@/tools/defineDevice'
 
 const inputValue = ref('')
 let searchResults: Ref<SearchItems | null> = ref(null)
+let device = inject('device')
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
@@ -32,11 +34,12 @@ watch(inputValue, async (newV, oldV) => {
     <div class="input-container">
       <Input v-model:value="inputValue" placeholder="Rechercher" />
     </div>
-    <div class="flex gap-4 w-full h-full justify-center items-center">
+    <div v-if="device === Device.Mobile && inputValue === ''"
+      class="flex gap-4 w-full h-full justify-center items-center flex-wrap text-center">
       <p class="text-md">Find your new style in the recommendations!</p>
       <Button
         label="Recommendations"
-        size="sm"
+        size=""
         @click="() => $router.push('/recommendations')"
       ></Button>
     </div>

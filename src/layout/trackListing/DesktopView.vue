@@ -1,38 +1,31 @@
 <script setup lang="ts">
-import type { IAudioManager } from '@/Tools/AudioManager'
-import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { SearchTrack } from '@/types/Search.types'
-import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { inject, ref } from 'vue';
 
-const tracksProps = defineProps({
-  tracks: { type: Array<SearchTrack>, required: true }
+import TrackCard from '@/components/Cards/TrackCard.vue';
+import type { IAudioManager } from '@/tools/AudioManager';
+import type { SearchTrack } from '@/types/Search.types';
+
+const props = defineProps({
+  tracks: { type: Array<SearchTrack>, required: true },
+  currentUrlTrackPlaying: { type: String, required: true },
+  newTrackIsBeingPlay: { type: Function, required: true },
 })
-
 const emits = defineEmits(['newTrackSelected'])
 
 const audioManager: IAudioManager | undefined = inject('audioManager')
 let currentTrack: HTMLElement | null
 let rightGhostTrack: HTMLElement | null
 let leftGhostTrack: HTMLElement | null
-let currentUrlTrackPlaying: Ref<string> = ref('')
 let currentTrackIndex = ref(0)
 let animating = ref(false)
 
-onMounted(async () => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
-})
-
-const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
-}
-
 const nextTrack = () => {
-  if (currentTrackIndex.value === tracksProps.tracks.length - 1 || animating.value) {
+  if (currentTrackIndex.value === props.tracks.length - 1 || animating.value) {
     return
   }
   animating.value = true
   audioManager?.pauseAudio()
-  newTrackIsBeingPlay('')
+  props.newTrackIsBeingPlay('')
   setAnimNext()
 }
 
@@ -41,7 +34,7 @@ const prevTrack = () => {
     return
   }
   audioManager?.pauseAudio()
-  newTrackIsBeingPlay('')
+  props.newTrackIsBeingPlay('')
   animating.value = true
   setAnimPrev()
 }
@@ -74,10 +67,6 @@ const setAnimPrev = () => {
   }, 300)
 }
 
-onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
 </script>
 
 <template>
@@ -85,39 +74,22 @@ onUnmounted(() => {
     <span v-if="currentUrlTrackPlaying !== ''" class="background-play-lightning" />
     <div class="track-listing">
       <div class="direction-icon">
-        <font-awesome-icon
-          v-if="currentTrackIndex > 0"
-          icon="arrow-left"
-          size="xl"
-          @click="prevTrack"
-          class="cursor-pointer"
-        />
+        <font-awesome-icon v-if="currentTrackIndex > 0" icon="arrow-left" size="xl" @click="prevTrack"
+          class="cursor-pointer" />
       </div>
       <div id="left-ghost-track" class="ghost-track left">
         <TrackCard v-if="currentTrackIndex > 0" :track="tracks[currentTrackIndex - 1]" />
       </div>
       <div id="current-track" :class="`track ${audioManager?.isPlaying ? '' : ''}`">
-        <TrackCard
-          v-if="tracks[currentTrackIndex]"
-          :track="tracks[currentTrackIndex]"
-          :currentUrlTrackPlaying="currentUrlTrackPlaying"
-          :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
-        />
+        <TrackCard v-if="tracks[currentTrackIndex]" :track="tracks[currentTrackIndex]"
+          :currentUrlTrackPlaying="currentUrlTrackPlaying" :setCurrentUrlTrackPlaying="newTrackIsBeingPlay" />
       </div>
       <div id="right-ghost-track" class="ghost-track right">
-        <TrackCard
-          v-if="currentTrackIndex < tracks.length - 1"
-          :track="tracks[currentTrackIndex + 1]"
-        />
+        <TrackCard v-if="currentTrackIndex < tracks.length - 1" :track="tracks[currentTrackIndex + 1]" />
       </div>
       <div class="direction-icon">
-        <font-awesome-icon
-          v-if="currentTrackIndex < tracks.length - 1"
-          icon="arrow-right"
-          size="xl"
-          @click="nextTrack"
-          class="cursor-pointer"
-        />
+        <font-awesome-icon v-if="currentTrackIndex < tracks.length - 1" icon="arrow-right" size="xl" @click="nextTrack"
+          class="cursor-pointer" />
       </div>
     </div>
   </div>

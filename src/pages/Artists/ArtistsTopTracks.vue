@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { SearchTrack } from '@/types/Search.types'
 import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+
+import type { SearchTrack } from '@/types/Search.types'
 import TrackRow from '../Albums/TrackRow.vue'
-import type { IAudioManager } from '@/Tools/AudioManager'
+import type { IAudioManager } from '@/tools/AudioManager'
 
 defineProps({
   tracks: { type: Array<SearchTrack>, required: true }
@@ -65,3 +66,4 @@ img {
   }
 }
 </style>
+../albums/TrackRow.vue

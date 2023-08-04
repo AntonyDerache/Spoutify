@@ -3,7 +3,7 @@ import { computed, inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { getArtists, getArtistsAlbums, getArtistsTopTracks } from '@/api/getArtists'
-import type { IAudioManager } from '@/Tools/AudioManager'
+import type { IAudioManager } from '@/tools/AudioManager'
 import type { SearchArtist } from '@/types/Search.types'
 import ArtistsTopTracks from './ArtistsTopTracks.vue'
 import ArtistsAlbums from './ArtistsAlbums.vue'

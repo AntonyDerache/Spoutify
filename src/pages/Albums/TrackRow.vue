@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { inject, ref, type PropType, computed } from 'vue'
+
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import IconButton from '@/components/Buttons/IconButton.vue'
-import type { AlbumTrack } from './Album.types'
-import type { IAudioManager } from '@/Tools/AudioManager'
+import type { IAudioManager } from '@/tools/AudioManager'
 import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
 import type { SearchTrack } from '@/types/Search.types'
+import type { AlbumTrack } from './Album.types'
 
 const props = defineProps({
   track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },

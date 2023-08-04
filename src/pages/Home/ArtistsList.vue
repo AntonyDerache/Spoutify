@@ -12,7 +12,7 @@ defineProps({
 
 <template>
   <p class="text-4xl font-bold p-4">Artists</p>
-  <div class="flex flex-wrap gap-2">
+  <div class="flex flex-wrap gap-2 justify-center md:justify-start">
     <div v-for="artist in artists.slice(0, 5)" :key="artist.name" class="artist-frame">
       <ArtistPhoto
         :name="artist.name"
@@ -22,13 +22,18 @@ defineProps({
     </div>
   </div>
   <div class="flex justify-center">
-    <Button label="View more..."></Button>
+    <Button label="View more"></Button>
   </div>
 </template>
 
 <style scoped lang="scss">
 .artist-frame {
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
+
+  @media (min-width: 768px) {
+    width: 12rem;
+    height: 12rem;
+  }
 }
 </style>
