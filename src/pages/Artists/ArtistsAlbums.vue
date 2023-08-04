@@ -4,13 +4,14 @@ import { ref } from 'vue'
 import type { SearchAlbum } from '@/types/Search.types'
 
 defineProps({
-  albums: { type: Array<SearchAlbum>, required: true }
+  albums: { type: Array<SearchAlbum>, required: true },
+  title: { type: String, required: true }
 })
 const showMore = ref(false)
 </script>
 
 <template>
-  <p class="text-4xl">Albums</p>
+  <p class="text-4xl">{{ title }}</p>
   <ul class="flex flex-wrap gap-4">
     <li
       v-for="album in showMore ? albums : albums.slice(0, 6)"

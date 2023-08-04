@@ -91,8 +91,8 @@ const displayLargeNumber = (number: number) => {
         </div>
         <div v-if="artistAlbums">
           <div class="flex flex-col gap-10">
-            <ArtistsAlbums v-if="albumsList" :albums="albumsList" />
-            <ArtistsAlbums v-if="singlesList" :albums="singlesList" />
+            <ArtistsAlbums v-if="albumsList && albumsList.length > 0" :albums="albumsList" title="Albums" />
+            <ArtistsAlbums v-if="singlesList && singlesList.length > 0" :albums="singlesList" title="Singles"/>
           </div>
         </div>
       </div>

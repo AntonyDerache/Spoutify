@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from 'vue'
+import { inject, onMounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import Modal from '@/components/Modal/Modal.vue'
@@ -8,7 +8,9 @@ import { getRecommendations } from '@/api/getRecommendations'
 import TracksListing from '@/layout/trackListing/TracksListing.vue'
 import type { SearchTrack } from '@/types/Search.types'
 import TracklistModalContent from './TracklistModalContent.vue'
+import { Device } from '@/tools/defineDevice'
 
+const device = inject('device')
 const tracks: Ref<Array<SearchTrack>> = ref([])
 let isTracklistModalOpen: Ref<boolean> = ref(false)
 let currentTrackIndex: Ref<number> = ref(0)
@@ -37,11 +39,13 @@ const onNewTrackSelected = (index: number) => {
 
 <template>
   <section>
-    <Modal :isOpen="isTracklistModalOpen" :onClose="closeTracklistModal">
-      <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex" />
-    </Modal>
-    <div class="flex justify-center pt-10">
-      <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal" />
+    <div v-if="device !== Device.Mobile">
+      <Modal :isOpen="isTracklistModalOpen" :onClose="closeTracklistModal">
+        <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex" />
+      </Modal>
+      <div class="flex justify-center pt-10">
+        <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal" />
+      </div>
     </div>
     <TracksListing :tracks="tracks" @newTrackSelected="onNewTrackSelected" />
   </section>
