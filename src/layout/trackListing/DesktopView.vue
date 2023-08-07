@@ -2,7 +2,7 @@
 import { inject, ref } from 'vue'
 
 import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 import type { SearchTrack } from '@/types/Search.types'
 
 const props = defineProps({

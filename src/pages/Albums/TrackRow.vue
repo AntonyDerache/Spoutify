@@ -3,7 +3,7 @@ import { inject, ref, type PropType, computed } from 'vue'
 
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import IconButton from '@/components/Buttons/IconButton.vue'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
 import type { SearchTrack } from '@/types/Search.types'
 import type { AlbumTrack } from './Album.types'

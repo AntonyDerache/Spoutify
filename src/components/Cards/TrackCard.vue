@@ -4,7 +4,7 @@ import { ref, type PropType, computed, inject } from 'vue'
 import IconButton from '@/components/Buttons/IconButton.vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 
 const props = defineProps({
   track: { type: Object as PropType<SearchTrack>, required: true },
@@ -68,12 +68,11 @@ const pauseTrack = () => {
   padding: 2rem;
   height: 100%;
   max-width: 16rem;
-  width: 75%;
+  width: 100%;
 
   @media (min-width: 768px) {
     max-width: unset;
-    min-width: 12rem;
-    width: auto;
+    width: 15rem;
   }
 
   .play-button {

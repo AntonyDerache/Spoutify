@@ -5,9 +5,9 @@ import Input from '@/components/Input/Input.vue'
 import Button from '@/components/Buttons/Button.vue'
 import { searchItem } from '@/api/searchItem'
 import type { SearchItems } from '@/types/Search.types'
-import ArtistsList from '@/pages/Home/ArtistsList.vue'
-import AlbumsList from '@/pages/Home/AlbumsList.vue'
-import TracksList from '@/pages/Home/TracksList.vue'
+import ArtistsList from '@/pages/home/ArtistsList.vue'
+import AlbumsList from '@/pages/home/AlbumsList.vue'
+import TracksList from '@/pages/home/TracksList.vue'
 import { Device } from '@/tools/defineDevice'
 
 const inputValue = ref('')
@@ -35,7 +35,7 @@ watch(inputValue, async (newV, oldV) => {
       <Input v-model:value="inputValue" placeholder="Rechercher" />
     </div>
     <div
-      v-if="device === Device.Mobile && inputValue === ''"
+      v-if="device !== Device.Mobile && inputValue === ''"
       class="flex gap-4 w-full h-full justify-center items-center flex-wrap text-center"
     >
       <p class="text-md">Find your new style in the recommendations!</p>
@@ -64,7 +64,7 @@ watch(inputValue, async (newV, oldV) => {
 
 <style scoped lang="scss">
 .section-centered {
-  padding-top: 0;
+  padding-top: 0 !important;
   transform: translateY(calc(100vh / 2 - 50%));
   transition: 0.15s ease-in-out;
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 import type { SearchTrack } from '@/types/Search.types'
 import { Device } from '@/tools/defineDevice'
 import MobileView from './MobileView.vue'

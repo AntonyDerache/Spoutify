@@ -4,7 +4,7 @@ import { ref, type PropType, type Ref, inject, onUnmounted, onMounted } from 'vu
 import TrackCard from '@/components/Cards/TrackCard.vue'
 import Button from '@/components/Buttons/Button.vue'
 import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 
 defineProps({
   tracks: { type: Object as PropType<Array<SearchTrack>>, required: true }

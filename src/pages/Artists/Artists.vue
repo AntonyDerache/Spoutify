@@ -3,14 +3,15 @@ import { computed, inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { getArtists, getArtistsAlbums, getArtistsTopTracks } from '@/api/getArtists'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 import type { SearchArtist } from '@/types/Search.types'
+import { largeNumberToString } from '@/tools/largeNumberToString'
 import ArtistsTopTracks from './ArtistsTopTracks.vue'
 import ArtistsAlbums from './ArtistsAlbums.vue'
 import type { ArtistTracks, ArtistAlbums } from './Artists.types'
 import ItemPresentation from '@/layout/ItemPresentation.vue'
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
+const audioManager: IAudioManager = inject('audioManager') as IAudioManager
 const artist: Ref<SearchArtist | undefined> = ref(undefined)
 const artistTopTracks: Ref<ArtistTracks | undefined> = ref(undefined)
 const artistAlbums: Ref<ArtistAlbums | undefined> = ref(undefined)
@@ -24,7 +25,7 @@ let albumsList = computed(() =>
 )
 
 onMounted(async () => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
+  audioManager.setOnEndedCallback(() => newTrackIsBeingPlay(''))
   const artistId = useRoute().params.id
   getArtist(artistId as string)
   getArtistTopTracks(artistId as string)
@@ -47,26 +48,12 @@ const getArtistAlbums = async (artistId: string) => {
 }
 
 onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
+  audioManager.pauseAudio()
+  audioManager.setOnEndedCallback(() => {})
 })
 
 const newTrackIsBeingPlay = (trackUrl: string) => {
   currentUrlTrackPlaying.value = trackUrl
-}
-
-const displayLargeNumber = (number: number) => {
-  let numberStr = number.toString().split('').reverse().join('')
-  let finalStr = ''
-
-  for (let i = 0; i < numberStr.length; i++) {
-    finalStr = finalStr.concat(numberStr[i])
-    if (i % 3 === 2) {
-      finalStr = finalStr.concat(' ')
-    }
-  }
-  finalStr = finalStr.split('').reverse().join('')
-  return finalStr
 }
 </script>
 
@@ -80,7 +67,7 @@ const displayLargeNumber = (number: number) => {
         <template v-slot:text>
           <div>
             <h1 class="text-5xl">{{ artist.name }}</h1>
-            <h3 class="text-md">{{ displayLargeNumber(artist.followers.total) }} Followers</h3>
+            <h3 class="text-md">{{ largeNumberToString(artist.followers.total) }} Followers</h3>
           </div>
         </template>
       </ItemPresentation>

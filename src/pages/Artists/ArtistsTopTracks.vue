@@ -2,7 +2,7 @@
 import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
 import type { SearchTrack } from '@/types/Search.types'
-import TrackRow from '../Albums/TrackRow.vue'
+import TrackRow from '../albums/TrackRow.vue'
 import type { IAudioManager } from '@/tools/AudioManager'
 
 defineProps({
@@ -66,4 +66,3 @@ img {
   }
 }
 </style>
-../albums/TrackRow.vue
