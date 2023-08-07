@@ -86,7 +86,6 @@ const setAnimPrev = () => {
       </div>
       <div id="current-track" :class="`track ${audioManager?.isPlaying ? '' : ''}`">
         <TrackCard
-          v-if="tracks[currentTrackIndex]"
           :track="tracks[currentTrackIndex]"
           :currentUrlTrackPlaying="currentUrlTrackPlaying"
           :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
@@ -202,20 +201,6 @@ const setAnimPrev = () => {
     border-radius: var(--border-radius-xl);
     height: 100%;
     left: 4.5rem;
-  }
-}
-
-@keyframes bounce {
-  0% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.5;
   }
 }
 </style>

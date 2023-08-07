@@ -3,24 +3,28 @@ import { ref, type PropType, computed, inject } from 'vue'
 
 import IconButton from '@/components/Buttons/IconButton.vue'
 import PlayButton from '@/components/PlayButton/PlayButton.vue'
+import RoundedSkeleton from '../Skeletons/RoundedSkeleton.vue'
+import TextSkeleton from '../Skeletons/TextSkeleton.vue'
+import SquareSkeleton from '../Skeletons/SquareSkeleton.vue'
 import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/tools/audioManager'
 
 const props = defineProps({
-  track: { type: Object as PropType<SearchTrack>, required: true },
+  track: { type: Object as PropType<SearchTrack> | undefined, required: false },
   currentUrlTrackPlaying: { type: String, required: false },
-  setCurrentUrlTrackPlaying: { type: Function, required: false }
+  setCurrentUrlTrackPlaying: { type: Function, required: false },
+  isSkeleton: { type: Boolean, required: false, default: false }
 })
 
 const audioManager: IAudioManager | undefined = inject('audioManager')
 let isPlaying = ref(false)
 
 isPlaying = computed(() => {
-  return props.currentUrlTrackPlaying === props.track.preview_url
+  return props.currentUrlTrackPlaying === props.track?.preview_url
 })
 
 const playTrack = () => {
-  if (!props.track.preview_url || !props.setCurrentUrlTrackPlaying) {
+  if (!props.track?.preview_url || !props.setCurrentUrlTrackPlaying) {
     return
   }
   props.setCurrentUrlTrackPlaying(props.track.preview_url)
@@ -37,20 +41,18 @@ const pauseTrack = () => {
 </script>
 
 <template>
-  <div class="track-card flex flex-col items-center justify-center">
-    <img :src="track.album?.images[1]?.url" :alt="`${track.name} album cover`" />
-    <div class="pt-4 text-start w-full flex flex-col items-center">
-      <div class="py-2">
-        <div class="flex gap-2">
-          <div v-if="track.preview_url" class="play-button">
-            <PlayButton :isPlaying="isPlaying" @click="isPlaying ? pauseTrack() : playTrack()" />
-          </div>
-          <a :href="track.uri">
-            <IconButton icon="fa-brands fa-spotify" size="md" iconSize="xl" />
-          </a>
+  <div v-if="track && !isSkeleton" class="track-card">
+    <img class="album-cover" :src="track.album?.images[1]?.url" :alt="`${track.name} album cover`" />
+    <div class="card-content">
+      <div class="button-container">
+        <div v-if="track.preview_url" class="play-button">
+          <PlayButton :isPlaying="isPlaying" @click="isPlaying ? pauseTrack() : playTrack()" />
         </div>
+        <a :href="track.uri">
+          <IconButton icon="fa-brands fa-spotify" size="md" iconSize="xl" />
+        </a>
       </div>
-      <p class="text-xl font-bold">
+      <p class="track-name">
         {{ track.name }}
       </p>
       <p>
@@ -58,21 +60,68 @@ const pauseTrack = () => {
       </p>
     </div>
   </div>
+  <div v-else class="track-card skeleton">
+    <div class="album-cover">
+      <SquareSkeleton/>
+    </div>
+    <div class="card-content">
+      <div class="button-container">
+        <div class="play-button">
+          <RoundedSkeleton />
+        </div>
+        <div class="play-button">
+          <RoundedSkeleton />
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-2 flex-col w-full">
+      <p class="track-name">
+        <TextSkeleton />
+      </p>
+      <p class="track-name">
+        <TextSkeleton />
+      </p>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .track-card {
-  background-color: rgba(170, 124, 229, 0.3);
+  background-color: rgba($color: #aa7ce5, $alpha: 0.3);
   border-radius: var(--border-radius-xl);
   transition: 0.2s ease-in-out;
   padding: 2rem;
   height: 100%;
   max-width: 16rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media (min-width: 768px) {
     max-width: unset;
     width: 15rem;
+  }
+
+  .card-content {
+    padding-top: 1rem;
+    text-align: start;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .album-cover {
+    color: blue;
+    width: 6rem;
+  }
+
+  .button-container {
+    padding: .5rem 0;
+    display: flex;
+    gap: 0.5rem;
   }
 
   .play-button {
@@ -80,16 +129,31 @@ const pauseTrack = () => {
     height: 2.5rem;
   }
 
+  .track-name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: bold;
+  }
+
   p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     width: 100%;
     word-wrap: break-word;
   }
-
-  img {
-    color: blue;
+}
+.skeleton {
+  .album-cover {
     border-radius: var(--border-radius);
     width: 6rem;
-    // height: 6rem;
+    height: 6rem;
+  }
+
+  .track-name {
+    height: 1.5rem;
   }
 }
 </style>

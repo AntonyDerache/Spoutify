@@ -13,14 +13,17 @@ import { Device } from '@/tools/defineDevice'
 const inputValue = ref('')
 let searchResults: Ref<SearchItems | null> = ref(null)
 let device = inject('device')
+let isLoading = false;
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
     searchResults.value = null
   }
   if (newV !== '') {
+    isLoading = true
     const result = await searchItem(newV, ['artist', 'track', 'album'])
     searchResults.value = result
+    isLoading = false
   }
 })
 </script>
@@ -45,18 +48,18 @@ watch(inputValue, async (newV, oldV) => {
         @click="() => $router.push('/recommendations')"
       ></Button>
     </div>
-    <div v-if="searchResults && inputValue.length > 0" class="flex flex-col gap-6">
+    <div v-if="inputValue.length > 0" class="flex flex-col gap-6">
       <ArtistsList
-        v-if="searchResults.artists.items.length > 0"
-        :artists="searchResults.artists.items"
+        :artists="searchResults?.artists.items"
+        :isLoading="isLoading"
       />
       <AlbumsList
-        v-if="searchResults.albums.items.length > 0"
-        :albums="searchResults.albums.items"
+        :albums="searchResults?.albums.items"
+        :isLoading="isLoading"
       />
       <TracksList
-        v-if="searchResults.tracks.items.length > 0"
-        :tracks="searchResults.tracks.items"
+        :tracks="searchResults?.tracks.items"
+        :isLoading="isLoading"
       />
     </div>
   </section>

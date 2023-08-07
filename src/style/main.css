@@ -1,6 +1,7 @@
 @import './base.css';
 @import './tailwind.css';
 @import './variables.css';
+@import './animations.css';
 
 #app {
   color: white;

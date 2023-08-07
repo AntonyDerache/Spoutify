@@ -3,8 +3,8 @@
   --border-radius: 8px;
   --border-radius-lg: 15px;
   --border-radius-xl: 30px;
-  --primary-color: rgb(170, 124, 229);
-  --secondary-color: rgb(58, 28, 93);
+  --primary-color: #aa7ce5;
+  --secondary-color: #3a1c5d;
   --dark-color: #2c2c2c;
   --header-height: 3.5rem;
 }

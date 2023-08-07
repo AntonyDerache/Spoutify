@@ -3,7 +3,7 @@ import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
 import type { SearchTrack } from '@/types/Search.types'
 import TrackRow from '../albums/TrackRow.vue'
-import type { IAudioManager } from '@/tools/AudioManager'
+import type { IAudioManager } from '@/tools/audioManager'
 
 defineProps({
   tracks: { type: Array<SearchTrack>, required: true }
