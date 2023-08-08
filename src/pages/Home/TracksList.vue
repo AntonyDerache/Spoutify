@@ -7,7 +7,7 @@ import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/tools/audioManager'
 
 defineProps({
-  tracks: { type: Object as PropType<Array<SearchTrack | undefined>> },
+  tracks: { type: Object as PropType<Array<SearchTrack> | undefined> },
   isLoading: { type: Boolean, required: false, default: false }
 })
 

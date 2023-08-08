@@ -146,8 +146,11 @@ const pauseTrack = () => {
   }
 }
 .skeleton {
+  &.track-card {
+    animation: bounce 1s infinite;
+  }
+
   .album-cover {
-    border-radius: var(--border-radius);
     width: 6rem;
     height: 6rem;
   }

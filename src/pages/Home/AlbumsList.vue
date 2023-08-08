@@ -5,7 +5,7 @@ import AlbumCard from '@/components/Cards/AlbumCard.vue'
 import type { SearchAlbum } from '@/types/Search.types'
 
 defineProps({
-  albums: { type: Object as PropType<Array<SearchAlbum | undefined>> },
+  albums: { type: Object as PropType<Array<SearchAlbum> | undefined> },
   isLoading: { type: Boolean, required: false, default: false }
 })
 </script>
