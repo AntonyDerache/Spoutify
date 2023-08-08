@@ -23,7 +23,7 @@ defineProps({
   </div>
   <div v-else class="artists-list">
     <div v-for="item in new Array(5)" :key="item" class="artist-frame">
-      <ArtistPhoto isSkeleton/>
+      <ArtistPhoto isSkeleton />
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ defineProps({
 .artists-list {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineProps({
-  borderRadius: { type: String, default: "0" }
+  borderRadius: { type: String, default: '0' }
 })
 </script>
 
 <template>
-  <div class="square-skeleton" :style="`border-radius: ${borderRadius}`" ></div>
+  <div class="square-skeleton" :style="`border-radius: ${borderRadius}`"></div>
 </template>
 
 <style scoped lang="scss">

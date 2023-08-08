@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import TextSkeleton from '../Skeletons/TextSkeleton.vue';
-import SquareSkeleton from '../Skeletons/SquareSkeleton.vue';
+import TextSkeleton from '../Skeletons/TextSkeleton.vue'
+import SquareSkeleton from '../Skeletons/SquareSkeleton.vue'
 
 defineProps({
   name: String,
   coverURL: String,
-  isSkeleton: Boolean,
+  isSkeleton: Boolean
 })
 </script>
 
 <template>
   <div v-if="!isSkeleton" class="album-card">
-    <img :src="coverURL" :alt="`${name} album cover`" class="cover"  />
+    <img :src="coverURL" :alt="`${name} album cover`" class="cover" />
     <p>{{ name }}</p>
   </div>
   <div v-else class="album-card">

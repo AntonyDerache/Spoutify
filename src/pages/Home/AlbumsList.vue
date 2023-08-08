@@ -32,7 +32,7 @@ defineProps({
 .albums-list {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: center;
 
   @media (min-width: 768px) {

@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { type Ref, onMounted, ref, inject, onUnmounted, watch } from 'vue';
+import { type Ref, onMounted, ref, inject, onUnmounted, watch } from 'vue'
 import { searchItems } from '@/api/searchItems'
-import { useRoute } from 'vue-router';
-import type { SearchTrack } from '@/types/Search.types';
-import TrackCard from '@/components/Cards/TrackCard.vue';
-import Input from '@/components/Input/Input.vue';
-import type { IAudioManager } from '@/tools/audioManager';
+import { useRoute } from 'vue-router'
+import type { SearchTrack } from '@/types/Search.types'
+import TrackCard from '@/components/Cards/TrackCard.vue'
+import Input from '@/components/Input/Input.vue'
+import type { IAudioManager } from '@/tools/audioManager'
 
 const audioManager: IAudioManager | undefined = inject('audioManager')
 const tracks: Ref<Array<SearchTrack> | null> = ref(null)
 let inputValue: Ref<string> = ref('')
 let currentUrlTrackPlaying: Ref<string> = ref('')
-let isLoading: Ref<boolean> = ref(false);
+let isLoading: Ref<boolean> = ref(false)
 
 onMounted(() => {
-  const querySearchValue = useRoute().query.searchValue;
+  const querySearchValue = useRoute().query.searchValue
   if (querySearchValue) {
-    inputValue.value = querySearchValue as string;
+    inputValue.value = querySearchValue as string
   }
   audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
 })
@@ -28,7 +28,7 @@ watch(inputValue, async (newV, oldV) => {
   if (newV !== '') {
     isLoading.value = true
     const result = await searchItems(newV, ['track'])
-    tracks.value = result.tracks.items;
+    tracks.value = result.tracks.items
     isLoading.value = false
   }
 })
@@ -39,7 +39,7 @@ const newTrackIsBeingPlay = (trackUrl: string) => {
 
 onUnmounted(() => {
   audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => { })
+  audioManager?.setOnEndedCallback(() => {})
 })
 </script>
 
@@ -63,7 +63,7 @@ onUnmounted(() => {
       </ul>
       <ul v-else>
         <li v-for="item in new Array(15)" :key="item" class="flex justify-center">
-           <TrackCard isSkeleton />
+          <TrackCard isSkeleton />
         </li>
       </ul>
     </div>

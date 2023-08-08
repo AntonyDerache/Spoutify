@@ -13,7 +13,7 @@ import { Device } from '@/tools/defineDevice'
 const inputValue = ref('')
 let searchResults: Ref<SearchItems | null> = ref(null)
 let device = inject('device')
-let isLoading: Ref<boolean> = ref(false);
+let isLoading: Ref<boolean> = ref(false)
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
@@ -49,14 +49,8 @@ watch(inputValue, async (newV, oldV) => {
       ></Button>
     </div>
     <div v-if="inputValue.length > 0" class="flex flex-col gap-6">
-      <ArtistsList
-        :artists="searchResults?.artists.items"
-        :isLoading="isLoading"
-      />
-      <AlbumsList
-        :albums="searchResults?.albums.items"
-        :isLoading="isLoading"
-      />
+      <ArtistsList :artists="searchResults?.artists.items" :isLoading="isLoading" />
+      <AlbumsList :albums="searchResults?.albums.items" :isLoading="isLoading" />
       <TracksList
         :tracks="searchResults?.tracks.items"
         :isLoading="isLoading"

@@ -9,7 +9,7 @@ import type { IAudioManager } from '@/tools/audioManager'
 defineProps({
   tracks: { type: Object as PropType<Array<SearchTrack> | undefined> },
   isLoading: { type: Boolean, required: false, default: false },
-  inputValue : { type: String, required: true, default: "" }
+  inputValue: { type: String, required: true, default: '' }
 })
 
 let currentUrlTrackPlaying: Ref<string> = ref('')
@@ -46,20 +46,23 @@ onUnmounted(() => {
     </li>
   </ul>
   <div class="flex justify-center">
-    <Button label="View more" @click="() => $router.push(`/tracks?searchValue=${inputValue}`)"></Button>
+    <Button
+      label="View more"
+      @click="() => $router.push(`/tracks?searchValue=${inputValue}`)"
+    ></Button>
   </div>
-</template>""
-
+</template>
+""
 
 <style scoepd lang="scss">
-  .track-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    justify-content: center;
+.track-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  justify-content: center;
 
-    @media (min-width: 768px) {
-      justify-content: flex-start;
-    }
+  @media (min-width: 768px) {
+    justify-content: flex-start;
   }
+}
 </style>

@@ -87,6 +87,6 @@ p {
 .progress-bar {
   display: flex;
   flex-grow: 1;
-  max-width: 20rem;;
+  max-width: 20rem;
 }
 </style>

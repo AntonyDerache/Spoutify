@@ -43,7 +43,11 @@ const pauseTrack = () => {
 
 <template>
   <div v-if="track && !isSkeleton" class="track-card">
-    <img class="album-cover" :src="track.album?.images[1]?.url" :alt="`${track.name} album cover`" />
+    <img
+      class="album-cover"
+      :src="track.album?.images[1]?.url"
+      :alt="`${track.name} album cover`"
+    />
     <div class="card-content">
       <div class="button-container">
         <div v-if="track.preview_url" class="play-button">
@@ -66,7 +70,7 @@ const pauseTrack = () => {
   </div>
   <div v-else class="track-card skeleton">
     <div class="album-cover">
-      <SquareSkeleton/>
+      <SquareSkeleton />
     </div>
     <div class="card-content">
       <div class="button-container">
@@ -80,13 +84,13 @@ const pauseTrack = () => {
     </div>
     <div class="flex gap-2 flex-col w-full">
       <p>
-        <TextSkeleton height="0.25rem"/>
+        <TextSkeleton height="0.25rem" />
       </p>
       <p>
         <TextSkeleton height="1.5rem" />
       </p>
       <p>
-        <TextSkeleton height="1.5rem"/>
+        <TextSkeleton height="1.5rem" />
       </p>
     </div>
   </div>
@@ -126,7 +130,7 @@ const pauseTrack = () => {
   }
 
   .button-container {
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     display: flex;
     gap: 0.5rem;
   }

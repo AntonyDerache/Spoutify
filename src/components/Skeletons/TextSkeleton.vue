@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps({
-  height: { type: String, default: "1.25rem"}
+  height: { type: String, default: '1.25rem' }
 })
 </script>
 
@@ -13,6 +13,6 @@ defineProps({
   animation: bounce 1s infinite;
   background-color: rgba($color: #3a1c5d, $alpha: 1);
   width: 100%;
-  border-radius: var(--border-radius)
+  border-radius: var(--border-radius);
 }
 </style>
