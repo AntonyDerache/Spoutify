@@ -8,7 +8,8 @@ import type { IAudioManager } from '@/tools/audioManager'
 
 defineProps({
   tracks: { type: Object as PropType<Array<SearchTrack> | undefined> },
-  isLoading: { type: Boolean, required: false, default: false }
+  isLoading: { type: Boolean, required: false, default: false },
+  inputValue : { type: String, required: true, default: "" }
 })
 
 let currentUrlTrackPlaying: Ref<string> = ref('')
@@ -30,24 +31,24 @@ onUnmounted(() => {
 
 <template>
   <p class="text-4xl font-bold p-4">Tracks</p>
-  <div v-if="!isLoading && tracks" class="track-list">
-    <div v-for="track in tracks.slice(0, 5)" :key="track.name">
+  <ul v-if="!isLoading && tracks" class="track-list">
+    <li v-for="track in tracks.slice(0, 4)" :key="track.name">
       <TrackCard
         :track="track"
         :currentUrlTrackPlaying="currentUrlTrackPlaying"
         :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
       />
-    </div>
-  </div>
-  <div v-else class="track-list">
-    <div v-for="item in new Array(5)" :key="item">
+    </li>
+  </ul>
+  <ul v-else class="track-list">
+    <li v-for="item in new Array(4)" :key="item">
       <TrackCard isSkeleton />
-    </div>
-  </div>
+    </li>
+  </ul>
   <div class="flex justify-center">
-    <Button label="View more"></Button>
+    <Button label="View more" @click="() => $router.push(`/tracks?searchValue=${inputValue}`)"></Button>
   </div>
-</template>
+</template>""
 
 
 <style scoepd lang="scss">

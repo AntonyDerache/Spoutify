@@ -5,6 +5,7 @@ import Recommendation from '@/pages/recommendations/Recommendation.vue'
 import Recommendations from '@/pages/recommendations/Recommendations.vue'
 import Albums from '@/pages/albums/Albums.vue'
 import Artists from '@/pages/artists/Artists.vue'
+import Tracks from '@/pages/tracks/Tracks.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +14,8 @@ const router = createRouter({
     { path: '/recommendations', name: 'Recommendations', component: Recommendations },
     { path: '/recommendations/:genre', name: 'Recommendation', component: Recommendation },
     { path: '/albums/:id', name: 'Album', component: Albums },
-    { path: '/artists/:id', name: 'Artist', component: Artists }
+    { path: '/artists/:id', name: 'Artist', component: Artists },
+    { path: '/tracks', name: 'Tracks', component: Tracks }
   ]
 })
 

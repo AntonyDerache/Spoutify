@@ -3,7 +3,7 @@ import { ref, watch, type Ref, inject } from 'vue'
 
 import Input from '@/components/Input/Input.vue'
 import Button from '@/components/Buttons/Button.vue'
-import { searchItem } from '@/api/searchItem'
+import { searchItems } from '@/api/searchItems'
 import type { SearchItems } from '@/types/Search.types'
 import ArtistsList from '@/pages/home/ArtistsList.vue'
 import AlbumsList from '@/pages/home/AlbumsList.vue'
@@ -13,17 +13,17 @@ import { Device } from '@/tools/defineDevice'
 const inputValue = ref('')
 let searchResults: Ref<SearchItems | null> = ref(null)
 let device = inject('device')
-let isLoading = false;
+let isLoading: Ref<boolean> = ref(false);
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
     searchResults.value = null
   }
   if (newV !== '') {
-    isLoading = true
-    const result = await searchItem(newV, ['artist', 'track', 'album'])
+    isLoading.value = true
+    const result = await searchItems(newV, ['artist', 'track', 'album'])
     searchResults.value = result
-    isLoading = false
+    isLoading.value = false
   }
 })
 </script>
@@ -60,6 +60,7 @@ watch(inputValue, async (newV, oldV) => {
       <TracksList
         :tracks="searchResults?.tracks.items"
         :isLoading="isLoading"
+        :inputValue="inputValue"
       />
     </div>
   </section>

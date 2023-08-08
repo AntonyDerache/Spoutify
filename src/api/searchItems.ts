@@ -2,7 +2,7 @@ import axios from 'axios'
 import { BASE_URL, SEARCH } from '../../constant'
 import { buildQueryParameters } from './setupAxios'
 
-export const searchItem = async (value: string, type: string[]) => {
+export const searchItems = async (value: string, type: string[]) => {
   if (value.length == 0 || type.length == 0) {
     return
   }

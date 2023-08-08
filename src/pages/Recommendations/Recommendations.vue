@@ -69,7 +69,7 @@ const goToRecommendations = () => {
       <p class="text-2xl">There is no matching genres</p>
     </div>
     <ul class="w-full justify-center">
-      <li class="flex justify-center" v-for="genre in genres" :key="genre">
+      <li v-for="genre in genres" :key="genre" class="flex justify-center">
         <Card
           :label="genre"
           :isSelected="selectedGenres.includes(genre)"
@@ -83,7 +83,6 @@ const goToRecommendations = () => {
 <style scoped>
 ul {
   display: grid;
-  /* grid-template-columns: repeat(auto-fit, minmax(210px, max-content)); */
   grid-template-columns: auto;
   grid-gap: 2rem;
 

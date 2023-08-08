@@ -16,10 +16,10 @@ let isTracklistModalOpen: Ref<boolean> = ref(false)
 let currentTrackIndex: Ref<number> = ref(0)
 
 onMounted(async () => {
-  const genre = ref(useRoute().params.genre)
+  const genre = useRoute().params.genre
   const response: { tracks: Array<SearchTrack> } = await getRecommendations(
     'genres',
-    genre.value as string
+    genre as string
   )
   tracks.value = response.tracks
 })
@@ -50,5 +50,3 @@ const onNewTrackSelected = (index: number) => {
     <TracksListing :tracks="tracks" @newTrackSelected="onNewTrackSelected" />
   </section>
 </template>
-
-<style scoped lang="scss"></style>
