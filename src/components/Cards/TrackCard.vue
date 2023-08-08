@@ -6,6 +6,7 @@ import PlayButton from '@/components/PlayButton/PlayButton.vue'
 import RoundedSkeleton from '../Skeletons/RoundedSkeleton.vue'
 import TextSkeleton from '../Skeletons/TextSkeleton.vue'
 import SquareSkeleton from '../Skeletons/SquareSkeleton.vue'
+import ProgressBar from '@/components/ProgressBar/ProgressBar.vue'
 import type { SearchTrack } from '@/types/Search.types'
 import type { IAudioManager } from '@/tools/audioManager'
 
@@ -52,6 +53,9 @@ const pauseTrack = () => {
           <IconButton icon="fa-brands fa-spotify" size="md" iconSize="xl" />
         </a>
       </div>
+      <div class="progress-bar">
+        <ProgressBar :isPlaying="isPlaying" />
+      </div>
       <p class="track-name">
         {{ track.name }}
       </p>
@@ -75,11 +79,14 @@ const pauseTrack = () => {
       </div>
     </div>
     <div class="flex gap-2 flex-col w-full">
-      <p class="track-name">
-        <TextSkeleton />
+      <p>
+        <TextSkeleton height="0.25rem"/>
       </p>
-      <p class="track-name">
-        <TextSkeleton />
+      <p>
+        <TextSkeleton height="1.5rem" />
+      </p>
+      <p>
+        <TextSkeleton height="1.5rem"/>
       </p>
     </div>
   </div>
@@ -129,6 +136,10 @@ const pauseTrack = () => {
     height: 2.5rem;
   }
 
+  .progress-bar {
+    width: 100%;
+  }
+
   .track-name {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -153,10 +164,6 @@ const pauseTrack = () => {
   .album-cover {
     width: 6rem;
     height: 6rem;
-  }
-
-  .track-name {
-    height: 1.5rem;
   }
 }
 </style>
