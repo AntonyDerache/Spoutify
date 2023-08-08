@@ -54,7 +54,7 @@ const pauseTrack = () => {
         </a>
       </div>
       <div class="progress-bar">
-        <ProgressBar :isPlaying="isPlaying" />
+        <ProgressBar :isPlaying="isPlaying" :hideIfNotPlaying="true" />
       </div>
       <p class="track-name">
         {{ track.name }}

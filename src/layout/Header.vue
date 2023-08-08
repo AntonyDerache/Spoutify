@@ -18,6 +18,9 @@ let device: Device | undefined = inject('device')
         <p v-if="device !== Device.Mobile" class="font-bold">Spoutify</p>
       </div>
       <nav class="flex w-full justify-end items-center gap-16 pl-10">
+        <p class="text-md md:text-base" @click="() => $router.push('/tracks')">
+          Tracks
+        </p>
         <p class="text-md md:text-base" @click="() => $router.push('/recommendations')">
           Recommendations
         </p>

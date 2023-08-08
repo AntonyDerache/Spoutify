@@ -35,7 +35,7 @@ watch(inputValue, async (newV, oldV) => {
     }`"
   >
     <div class="input-container">
-      <Input v-model:value="inputValue" placeholder="Rechercher" />
+      <Input v-model:value="inputValue" placeholder="Find" />
     </div>
     <div
       v-if="device !== Device.Mobile && inputValue === ''"

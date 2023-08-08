@@ -22,7 +22,6 @@ onMounted(() => {
 })
 
 watch(inputValue, async (newV, oldV) => {
-  console.log(newV)
   if (oldV === '') {
     tracks.value = null
   }
@@ -47,7 +46,7 @@ onUnmounted(() => {
 <template>
   <section class="padding-section flex gap-6 items-center justify-center flex-col">
     <div class="input-container">
-      <Input v-model:value="inputValue" placeholder="Rechercher" />
+      <Input v-model:value="inputValue" placeholder="Find a track" />
     </div>
     <div v-if="tracks?.length === 0" class="absolute top-1/2">
       <p class="text-2xl">There is no matches</p>

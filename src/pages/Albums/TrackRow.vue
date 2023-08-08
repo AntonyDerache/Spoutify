@@ -7,6 +7,7 @@ import type { IAudioManager } from '@/tools/audioManager'
 import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
 import type { SearchTrack } from '@/types/Search.types'
 import type { AlbumTrack } from './Album.types'
+import ProgressBar from '@/components/ProgressBar/ProgressBar.vue'
 
 const props = defineProps({
   track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },
@@ -36,7 +37,7 @@ const pauseTrack = () => {
 
 <template>
   <div
-    class="flex items-center gap-4 justify-between"
+    class="flex items-center gap-4 justify-start w-5/6"
     @click="isPlaying ? pauseTrack() : playTrack()"
   >
     <div class="play-button m-2">
@@ -44,8 +45,11 @@ const pauseTrack = () => {
     </div>
     <img v-if="albumCover" :src="albumCover" :alt="`${track.name}'s album cover`" />
     <p :class="`track-name ${isPlaying ? 'color-primary' : ''}`">{{ track.name }}</p>
+    <div class="progress-bar">
+      <ProgressBar :isPlaying="isPlaying" :hideIfNotPlaying="true" />
+    </div>
   </div>
-  <div class="flex gap-4 items-center">
+  <div class="flex gap-4 items-center justify-end w-1/6">
     <a :href="track.uri">
       <IconButton class="spotify-button" icon="fa-brands fa-spotify" iconSize="lg" />
     </a>
@@ -78,5 +82,11 @@ p {
 
 .track-duration {
   width: 1.5rem;
+}
+
+.progress-bar {
+  display: flex;
+  flex-grow: 1;
+  max-width: 20rem;;
 }
 </style>
