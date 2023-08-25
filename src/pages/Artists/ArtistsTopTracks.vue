@@ -1,30 +1,36 @@
 <script setup lang="ts">
-import { inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
+import {
+  inject,
+  onMounted,
+  onUnmounted,
+  ref,
+  type Ref,
+} from 'vue';
 
-import type { SearchTrack } from '@/types/Search.types'
-import TrackRow from '../albums/TrackRow.vue'
-import type { IAudioManager } from '@/tools/audioManager'
+import type { SearchTrack } from '@/types/search.types';
+import TrackRow from '../albums/TrackRow.vue';
+import type { IAudioManager } from '@/tools/audioManager';
 
 defineProps({
-  tracks: { type: Array<SearchTrack>, required: true }
-})
+  tracks: { type: Array<SearchTrack>, required: true },
+});
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-const showMore = ref(false)
-let currentUrlTrackPlaying: Ref<string> = ref('')
-
-onMounted(async () => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
-})
+const audioManager: IAudioManager | undefined = inject('audioManager');
+const showMore = ref(false);
+const currentUrlTrackPlaying: Ref<string> = ref('');
 
 const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
-}
+  currentUrlTrackPlaying.value = trackUrl;
+};
+
+onMounted(async () => {
+  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''));
+});
 
 onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
+  audioManager?.pauseAudio();
+  audioManager?.setOnEndedCallback(() => {});
+});
 </script>
 
 <template>

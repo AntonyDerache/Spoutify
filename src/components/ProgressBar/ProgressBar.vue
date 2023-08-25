@@ -1,47 +1,51 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue'
+import { ref, watch, type Ref } from 'vue';
 
 const props = defineProps({
   isPlaying: { type: Boolean, default: false },
-  hideIfNotPlaying: { type: Boolean, default: false }
-})
+  hideIfNotPlaying: { type: Boolean, default: false },
+});
 
-let left = 0
-let timeOnStart = new Date()
-let bar: Ref<HTMLElement | null> = ref(null)
-let intervalId: Ref<number> = ref(0)
+let left = 0;
+let timeOnStart = new Date();
+const bar: Ref<HTMLElement | null> = ref(null);
+const intervalId: Ref<number> = ref(0);
+
+const moveTimer = () => {
+  if (bar.value) {
+    const durationPourcentage = new Date(new Date().getTime() - timeOnStart.getTime()).getSeconds();
+    left = (durationPourcentage / 29) * 100;
+    bar.value.style.transform = `translateX(${left}%)`;
+  }
+};
+
+const startTimer = () => {
+  timeOnStart = new Date();
+  if (bar.value) {
+    bar.value.style.transition = '1s linear';
+    intervalId.value = setInterval(() => moveTimer(), 1000);
+  }
+};
+
+const stopTimer = () => {
+  clearInterval(intervalId.value);
+  if (bar.value) {
+    left = 0;
+    bar.value.style.transition = '.2s linear';
+    bar.value.style.transform = `translateX(${left}%)`;
+  }
+};
 
 watch(
   () => props.isPlaying,
   (newVal) => {
-    newVal ? startTimer() : stopTimer()
-  }
-)
-
-const startTimer = () => {
-  timeOnStart = new Date()
-  if (bar.value) {
-    bar.value.style.transition = '1s linear'
-    intervalId.value = setInterval(() => moveTimer(), 1000)
-  }
-}
-
-const moveTimer = () => {
-  if (bar.value) {
-    const durationPourcentage = new Date(new Date().getTime() - timeOnStart.getTime()).getSeconds()
-    left = (durationPourcentage / 29) * 100
-    bar.value.style.transform = `translateX(${left}%)`
-  }
-}
-
-const stopTimer = () => {
-  clearInterval(intervalId.value)
-  if (bar.value) {
-    left = 0
-    bar.value.style.transition = '.2s linear'
-    bar.value.style.transform = `translateX(${left}%)`
-  }
-}
+    if (newVal) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+  },
+);
 </script>
 
 <template>

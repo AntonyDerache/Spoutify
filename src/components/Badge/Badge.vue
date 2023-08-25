@@ -2,8 +2,8 @@
 defineProps({
   label: String,
   icon: String,
-  onRemove: Function
-})
+  onRemove: Function,
+});
 </script>
 
 <template>

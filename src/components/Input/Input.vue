@@ -2,9 +2,9 @@
 defineProps({
   value: String,
   label: String,
-  placeholder: String
-})
-defineEmits(['update:value'])
+  placeholder: String,
+});
+defineEmits(['update:value']);
 </script>
 
 <template>

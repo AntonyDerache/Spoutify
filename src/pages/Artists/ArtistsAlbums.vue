@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-import type { SearchAlbum } from '@/types/Search.types'
+import type { SearchAlbum } from '@/types/search.types';
 
 defineProps({
   albums: { type: Array<SearchAlbum>, required: true },
-  title: { type: String, required: true }
-})
-const showMore = ref(false)
+  title: { type: String, required: true },
+});
+const showMore = ref(false);
 </script>
 
 <template>

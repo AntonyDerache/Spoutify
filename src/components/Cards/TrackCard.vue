@@ -1,44 +1,47 @@
 <script setup lang="ts">
-import { ref, type PropType, computed, inject } from 'vue'
+import {
+  ref,
+  type PropType,
+  computed,
+  inject,
+} from 'vue';
 
-import IconButton from '@/components/Buttons/IconButton.vue'
-import PlayButton from '@/components/PlayButton/PlayButton.vue'
-import RoundedSkeleton from '../Skeletons/RoundedSkeleton.vue'
-import TextSkeleton from '../Skeletons/TextSkeleton.vue'
-import SquareSkeleton from '../Skeletons/SquareSkeleton.vue'
-import ProgressBar from '@/components/ProgressBar/ProgressBar.vue'
-import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/tools/audioManager'
+import IconButton from '@/components/Buttons/IconButton.vue';
+import PlayButton from '@/components/PlayButton/PlayButton.vue';
+import RoundedSkeleton from '../Skeletons/RoundedSkeleton.vue';
+import TextSkeleton from '../Skeletons/TextSkeleton.vue';
+import SquareSkeleton from '../Skeletons/SquareSkeleton.vue';
+import ProgressBar from '@/components/ProgressBar/ProgressBar.vue';
+import type { SearchTrack } from '@/types/search.types';
+import type { IAudioManager } from '@/tools/audioManager';
 
 const props = defineProps({
   track: { type: Object as PropType<SearchTrack> | undefined, required: false },
   currentUrlTrackPlaying: { type: String, required: false },
   setCurrentUrlTrackPlaying: { type: Function, required: false },
-  isSkeleton: { type: Boolean, required: false, default: false }
-})
+  isSkeleton: { type: Boolean, required: false, default: false },
+});
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-let isPlaying = ref(false)
+const audioManager: IAudioManager | undefined = inject('audioManager');
+let isPlaying = ref(false);
 
-isPlaying = computed(() => {
-  return props.currentUrlTrackPlaying === props.track?.preview_url
-})
+isPlaying = computed(() => props.currentUrlTrackPlaying === props.track?.preview_url);
 
 const playTrack = () => {
   if (!props.track?.preview_url || !props.setCurrentUrlTrackPlaying) {
-    return
+    return;
   }
-  props.setCurrentUrlTrackPlaying(props.track.preview_url)
-  audioManager?.setSrc(props.track.preview_url)
-}
+  props.setCurrentUrlTrackPlaying(props.track.preview_url);
+  audioManager?.setSrc(props.track.preview_url);
+};
 
 const pauseTrack = () => {
   if (!props.setCurrentUrlTrackPlaying) {
-    return
+    return;
   }
-  audioManager?.pauseAudio()
-  props.setCurrentUrlTrackPlaying('')
-}
+  audioManager?.pauseAudio();
+  props.setCurrentUrlTrackPlaying('');
+};
 </script>
 
 <template>

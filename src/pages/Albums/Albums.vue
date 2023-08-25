@@ -1,46 +1,55 @@
 <script setup lang="ts">
-import { computed, inject, onMounted, onUnmounted, ref, type Ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {
+  computed,
+  inject,
+  onMounted,
+  onUnmounted,
+  ref,
+  type Ref,
+} from 'vue';
+import { useRoute } from 'vue-router';
 
-import { getAlbums } from '@/api/getAlbums'
-import type { Album, AlbumTrack } from './Album.types'
-import TrackRow from './TrackRow.vue'
-import type { IAudioManager } from '@/Tools/AudioManager'
-import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
-import ItemPresentation from '@/layout/ItemPresentation.vue'
+import getAlbums from '@/api/getAlbums';
+import type { Album, AlbumTrack } from './Album.types';
+import TrackRow from './TrackRow.vue';
+import type { IAudioManager } from '@/tools/audioManager';
+import millisecondsToMinutesAndSeconds from '@/tools/millisecondsToMinutesAndSecdonds';
+import ItemPresentation from '@/layout/ItemPresentation.vue';
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-const album: Ref<Album | undefined> = ref(undefined)
-let currentUrlTrackPlaying: Ref<string> = ref('')
-
-const albumDuration = computed(() => calculAlbumDuration(album.value?.tracks.items))
-
-onMounted(async () => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
-  getAlbum()
-})
-
-const getAlbum = async () => {
-  const albumId = useRoute().params.id
-  const result = await getAlbums(albumId as string)
-  album.value = result
-}
-
-const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
-}
+const audioManager: IAudioManager | undefined = inject('audioManager');
+const album: Ref<Album | undefined> = ref(undefined);
+const currentUrlTrackPlaying: Ref<string> = ref('');
 
 const calculAlbumDuration = (tracks: Array<AlbumTrack> | undefined) => {
-  let durationMs = 0
-  if (!tracks) return durationMs
-  tracks.forEach((track) => (durationMs += track.duration_ms))
-  return durationMs
-}
+  let durationMs = 0;
+  if (!tracks) return durationMs;
+  tracks.forEach((track: AlbumTrack) => {
+    durationMs += track.duration_ms;
+  });
+  return durationMs;
+};
+
+const albumDuration = computed(() => calculAlbumDuration(album.value?.tracks.items));
+
+const newTrackIsBeingPlay = (trackUrl: string) => {
+  currentUrlTrackPlaying.value = trackUrl;
+};
+
+onMounted(async () => {
+  const getAlbum = async () => {
+    const albumId = useRoute().params.id;
+    const result = await getAlbums(albumId as string);
+    album.value = result;
+  };
+
+  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''));
+  getAlbum();
+});
 
 onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
+  audioManager?.pauseAudio();
+  audioManager?.setOnEndedCallback(() => {});
+});
 </script>
 
 <template>
@@ -108,4 +117,3 @@ img {
   transition: 0.2s ease-in-out;
 }
 </style>
-@/tools/audioManager

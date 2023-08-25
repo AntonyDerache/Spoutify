@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps({
   isOpen: { type: Boolean, required: true, default: false },
-  onClose: { type: Function, required: false }
-})
+  onClose: { type: Function, required: false },
+});
 </script>
 
 <template>

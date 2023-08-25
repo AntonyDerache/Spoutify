@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faXmark,
   faPlay,
@@ -6,10 +6,9 @@ import {
   faPaperPlane,
   faArrowUpRightFromSquare,
   faArrowLeft,
-  faArrowRight
-} from '@fortawesome/free-solid-svg-icons'
-import {} from '@fortawesome/free-regular-svg-icons'
-import { faSpotify } from '@fortawesome/free-brands-svg-icons'
+  faArrowRight,
+} from '@fortawesome/free-solid-svg-icons';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
   faPlay,
@@ -19,5 +18,5 @@ library.add(
   faArrowUpRightFromSquare,
   faSpotify,
   faArrowLeft,
-  faArrowRight
-)
+  faArrowRight,
+);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
-  height: { type: String, default: '1.25rem' }
-})
+  height: { type: String, default: '1.25rem' },
+});
 </script>
 
 <template>

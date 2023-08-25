@@ -1,38 +1,43 @@
 <script setup lang="ts">
-import { inject, ref, type PropType, computed } from 'vue'
+import {
+  inject,
+  ref,
+  type PropType,
+  computed,
+} from 'vue';
 
-import PlayButton from '@/components/PlayButton/PlayButton.vue'
-import IconButton from '@/components/Buttons/IconButton.vue'
-import type { IAudioManager } from '@/tools/audioManager'
-import { millisecondsToMinutesAndSeconds } from '@/tools/millisecondsToMinutesAndSecdonds'
-import type { SearchTrack } from '@/types/Search.types'
-import type { AlbumTrack } from './Album.types'
-import ProgressBar from '@/components/ProgressBar/ProgressBar.vue'
+import PlayButton from '@/components/PlayButton/PlayButton.vue';
+import IconButton from '@/components/Buttons/IconButton.vue';
+import type { IAudioManager } from '@/tools/audioManager';
+import millisecondsToMinutesAndSeconds from '@/tools/millisecondsToMinutesAndSecdonds';
+import type { SearchTrack } from '@/types/search.types';
+import type { AlbumTrack } from './Album.types';
+import ProgressBar from '@/components/ProgressBar/ProgressBar.vue';
 
 const props = defineProps({
   track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },
   albumCover: String,
   currentUrlTrackPlaying: { type: String, required: true },
-  setCurrentUrlTrackPlaying: { type: Function, required: true }
-})
+  setCurrentUrlTrackPlaying: { type: Function, required: true },
+});
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-let isPlaying = ref(false)
+const audioManager: IAudioManager | undefined = inject('audioManager');
+let isPlaying = ref(false);
 
-isPlaying = computed(() => props.currentUrlTrackPlaying === props.track.preview_url)
+isPlaying = computed(() => props.currentUrlTrackPlaying === props.track.preview_url);
 
 const playTrack = () => {
   if (!props.track.preview_url) {
-    return
+    return;
   }
-  audioManager?.setSrc(props.track.preview_url)
-  props.setCurrentUrlTrackPlaying(props.track.preview_url)
-}
+  audioManager?.setSrc(props.track.preview_url);
+  props.setCurrentUrlTrackPlaying(props.track.preview_url);
+};
 
 const pauseTrack = () => {
-  audioManager?.pauseAudio()
-  props.setCurrentUrlTrackPlaying('')
-}
+  audioManager?.pauseAudio();
+  props.setCurrentUrlTrackPlaying('');
+};
 </script>
 
 <template>

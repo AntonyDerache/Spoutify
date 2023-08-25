@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { BASE_URL, GET_ALBUM } from '../../constant'
+import axios from 'axios';
+import { BASE_URL, GET_ALBUM } from '../../constant';
 
-export const getAlbums = async (id: string) => {
+export default async (id: string) => {
   if (!id) {
-    return
+    return null;
   }
-  const URL = BASE_URL + GET_ALBUM + `/${id}`
-  const result = await axios.get(URL)
-  return result.data
-}
+  const URL = `${BASE_URL + GET_ALBUM}/${id}`;
+  const result = await axios.get(URL);
+  return result.data;
+};

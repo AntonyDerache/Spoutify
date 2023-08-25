@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { PropType } from 'vue'
+import type { PropType } from 'vue';
 
-import ArtistPhoto from '@/components/ArtistsPhoto/ArtistsPhoto.vue'
-import type { SearchArtist } from '@/types/Search.types'
+import ArtistPhoto from '@/components/ArtistsPhoto/ArtistsPhoto.vue';
+import type { SearchArtist } from '@/types/search.types';
 
 defineProps({
   artists: { type: Object as PropType<Array<SearchArtist> | undefined> },
-  isLoading: { type: Boolean, required: false, default: false }
-})
+  isLoading: { type: Boolean, required: false, default: false },
+});
 </script>
 
 <template>

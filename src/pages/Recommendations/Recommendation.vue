@@ -1,40 +1,45 @@
 <script setup lang="ts">
-import { inject, onMounted, ref, type Ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {
+  inject,
+  onMounted,
+  ref,
+  type Ref,
+} from 'vue';
+import { useRoute } from 'vue-router';
 
-import Modal from '@/components/Modal/Modal.vue'
-import Button from '@/components/Buttons/Button.vue'
-import { getRecommendations } from '@/api/getRecommendations'
-import TracksListing from '@/layout/trackListing/TracksListing.vue'
-import type { SearchTrack } from '@/types/Search.types'
-import TracklistModalContent from './TracklistModalContent.vue'
-import { Device } from '@/tools/defineDevice'
+import Modal from '@/components/Modal/Modal.vue';
+import Button from '@/components/Buttons/Button.vue';
+import getRecommendations from '@/api/getRecommendations';
+import TracksListing from '@/layout/trackListing/TracksListing.vue';
+import type { SearchTrack } from '@/types/search.types';
+import TracklistModalContent from './TracklistModalContent.vue';
+import { Device } from '@/tools/defineDevice';
 
-const device = inject('device')
-const tracks: Ref<Array<SearchTrack>> = ref([])
-let isTracklistModalOpen: Ref<boolean> = ref(false)
-let currentTrackIndex: Ref<number> = ref(0)
+const device = inject('device');
+const tracks: Ref<Array<SearchTrack>> = ref([]);
+const isTracklistModalOpen: Ref<boolean> = ref(false);
+const currentTrackIndex: Ref<number> = ref(0);
 
 onMounted(async () => {
-  const genre = useRoute().params.genre
+  const { genre } = useRoute().params;
   const response: { tracks: Array<SearchTrack> } = await getRecommendations(
     'genres',
-    genre as string
-  )
-  tracks.value = response.tracks
-})
+    genre as string,
+  );
+  tracks.value = response.tracks;
+});
 
 const closeTracklistModal = () => {
-  isTracklistModalOpen.value = false
-}
+  isTracklistModalOpen.value = false;
+};
 
 const openTracklistModal = () => {
-  isTracklistModalOpen.value = true
-}
+  isTracklistModalOpen.value = true;
+};
 
 const onNewTrackSelected = (index: number) => {
-  currentTrackIndex.value = index
-}
+  currentTrackIndex.value = index;
+};
 </script>
 
 <template>

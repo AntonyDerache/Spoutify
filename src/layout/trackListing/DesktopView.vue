@@ -1,71 +1,71 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { inject, ref } from 'vue';
 
-import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { IAudioManager } from '@/tools/audioManager'
-import type { SearchTrack } from '@/types/Search.types'
+import TrackCard from '@/components/Cards/TrackCard.vue';
+import type { IAudioManager } from '@/tools/audioManager';
+import type { SearchTrack } from '@/types/search.types';
 
 const props = defineProps({
   tracks: { type: Array<SearchTrack>, required: true },
   currentUrlTrackPlaying: { type: String, required: true },
-  newTrackIsBeingPlay: { type: Function, required: true }
-})
-const emits = defineEmits(['newTrackSelected'])
+  newTrackIsBeingPlay: { type: Function, required: true },
+});
+const emits = defineEmits(['newTrackSelected']);
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-let currentTrack: HTMLElement | null
-let rightGhostTrack: HTMLElement | null
-let leftGhostTrack: HTMLElement | null
-let currentTrackIndex = ref(0)
-let animating = ref(false)
+const audioManager: IAudioManager | undefined = inject('audioManager');
+let currentTrack: HTMLElement | null;
+let rightGhostTrack: HTMLElement | null;
+let leftGhostTrack: HTMLElement | null;
+const currentTrackIndex = ref(0);
+const animating = ref(false);
+
+const setAnimNext = () => {
+  currentTrack = document.getElementById('current-track');
+  rightGhostTrack = document.getElementById('right-ghost-track');
+  currentTrack?.classList.add('anim-next');
+  rightGhostTrack?.classList.add('anim');
+  setTimeout(() => {
+    currentTrack?.classList.remove('anim-next');
+    rightGhostTrack?.classList.remove('anim');
+    currentTrackIndex.value++;
+    animating.value = false;
+    emits('newTrackSelected', currentTrackIndex.value);
+  }, 300);
+};
+
+const setAnimPrev = () => {
+  currentTrack = document.getElementById('current-track');
+  leftGhostTrack = document.getElementById('left-ghost-track');
+  currentTrack?.classList.add('anim-prev');
+  leftGhostTrack?.classList.add('anim');
+  setTimeout(() => {
+    currentTrack?.classList.remove('anim-prev');
+    leftGhostTrack?.classList.remove('anim');
+    currentTrackIndex.value--;
+    animating.value = false;
+    emits('newTrackSelected', currentTrackIndex.value);
+  }, 300);
+};
 
 const nextTrack = () => {
   if (currentTrackIndex.value === props.tracks.length - 1 || animating.value) {
-    return
+    return;
   }
-  animating.value = true
-  audioManager?.pauseAudio()
-  props.newTrackIsBeingPlay('')
-  setAnimNext()
-}
+  animating.value = true;
+  audioManager?.pauseAudio();
+  props.newTrackIsBeingPlay('');
+  setAnimNext();
+};
 
 const prevTrack = () => {
   if (currentTrackIndex.value === 0 || animating.value) {
-    return
+    return;
   }
-  audioManager?.pauseAudio()
-  props.newTrackIsBeingPlay('')
-  animating.value = true
-  setAnimPrev()
-}
-
-const setAnimNext = () => {
-  currentTrack = document.getElementById('current-track')
-  rightGhostTrack = document.getElementById('right-ghost-track')
-  currentTrack?.classList.add('anim-next')
-  rightGhostTrack?.classList.add('anim')
-  setTimeout(() => {
-    currentTrack?.classList.remove('anim-next')
-    rightGhostTrack?.classList.remove('anim')
-    currentTrackIndex.value++
-    animating.value = false
-    emits('newTrackSelected', currentTrackIndex.value)
-  }, 300)
-}
-
-const setAnimPrev = () => {
-  currentTrack = document.getElementById('current-track')
-  leftGhostTrack = document.getElementById('left-ghost-track')
-  currentTrack?.classList.add('anim-prev')
-  leftGhostTrack?.classList.add('anim')
-  setTimeout(() => {
-    currentTrack?.classList.remove('anim-prev')
-    leftGhostTrack?.classList.remove('anim')
-    currentTrackIndex.value--
-    animating.value = false
-    emits('newTrackSelected', currentTrackIndex.value)
-  }, 300)
-}
+  audioManager?.pauseAudio();
+  props.newTrackIsBeingPlay('');
+  animating.value = true;
+  setAnimPrev();
+};
 </script>
 
 <template>

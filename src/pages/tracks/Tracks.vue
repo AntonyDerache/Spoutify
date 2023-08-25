@@ -1,46 +1,53 @@
 <script setup lang="ts">
-import { type Ref, onMounted, ref, inject, onUnmounted, watch } from 'vue'
-import { searchItems } from '@/api/searchItems'
-import { useRoute } from 'vue-router'
-import type { SearchTrack } from '@/types/Search.types'
-import TrackCard from '@/components/Cards/TrackCard.vue'
-import Input from '@/components/Input/Input.vue'
-import type { IAudioManager } from '@/tools/audioManager'
+import {
+  type Ref,
+  onMounted,
+  ref,
+  inject,
+  onUnmounted,
+  watch,
+} from 'vue';
+import { useRoute } from 'vue-router';
+import searchItems from '@/api/searchItems';
+import type { SearchTrack } from '@/types/search.types';
+import TrackCard from '@/components/Cards/TrackCard.vue';
+import Input from '@/components/Input/Input.vue';
+import type { IAudioManager } from '@/tools/audioManager';
 
-const audioManager: IAudioManager | undefined = inject('audioManager')
-const tracks: Ref<Array<SearchTrack> | null> = ref(null)
-let inputValue: Ref<string> = ref('')
-let currentUrlTrackPlaying: Ref<string> = ref('')
-let isLoading: Ref<boolean> = ref(false)
+const audioManager: IAudioManager | undefined = inject('audioManager');
+const tracks: Ref<Array<SearchTrack> | null> = ref(null);
+const inputValue: Ref<string> = ref('');
+const currentUrlTrackPlaying: Ref<string> = ref('');
+const isLoading: Ref<boolean> = ref(false);
+
+const newTrackIsBeingPlay = (trackUrl: string) => {
+  currentUrlTrackPlaying.value = trackUrl;
+};
 
 onMounted(() => {
-  const querySearchValue = useRoute().query.searchValue
+  const querySearchValue = useRoute().query.searchValue;
   if (querySearchValue) {
-    inputValue.value = querySearchValue as string
+    inputValue.value = querySearchValue as string;
   }
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
-})
+  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''));
+});
 
 watch(inputValue, async (newV, oldV) => {
   if (oldV === '') {
-    tracks.value = null
+    tracks.value = null;
   }
   if (newV !== '') {
-    isLoading.value = true
-    const result = await searchItems(newV, ['track'])
-    tracks.value = result.tracks.items
-    isLoading.value = false
+    isLoading.value = true;
+    const result = await searchItems(newV, ['track']);
+    tracks.value = result.tracks.items;
+    isLoading.value = false;
   }
-})
-
-const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
-}
+});
 
 onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
+  audioManager?.pauseAudio();
+  audioManager?.setOnEndedCallback(() => {});
+});
 </script>
 
 <template>

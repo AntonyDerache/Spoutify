@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import TrackCard from '@/components/Cards/TrackCard.vue'
-import type { SearchTrack } from '@/types/Search.types'
+import TrackCard from '@/components/Cards/TrackCard.vue';
+import type { SearchTrack } from '@/types/search.types';
 
 defineProps({
   tracks: { type: Array<SearchTrack>, required: true },
   currentUrlTrackPlaying: { type: String, required: true },
-  newTrackIsBeingPlay: { type: Function, required: true }
-})
+  newTrackIsBeingPlay: { type: Function, required: true },
+});
 </script>
 
 <template>

@@ -5,12 +5,13 @@ export enum Device {
 }
 
 export const defineDevice = () => {
-  const width = window.screen.width
+  const width = window.innerWidth;
+
   if (width < 768) {
-    return Device.Mobile
-  } else if (width >= 768 && width < 1024) {
-    return Device.Tablet
-  } else {
-    return Device.Desktop
+    return Device.Mobile;
   }
-}
+  if (width >= 768 && width < 1024) {
+    return Device.Tablet;
+  }
+  return Device.Desktop;
+};

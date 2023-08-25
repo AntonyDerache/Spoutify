@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { SearchTrack } from '@/types/Search.types'
+import type { SearchTrack } from '@/types/search.types';
 
 defineProps({
   currentTrackIndex: Number,
-  tracks: Array<SearchTrack>
-})
+  tracks: Array<SearchTrack>,
+});
 </script>
 
 <template>

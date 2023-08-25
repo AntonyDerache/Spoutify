@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import TextSkeleton from '@/components/Skeletons/TextSkeleton.vue'
-import RoundedSkeleton from '@/components/Skeletons/RoundedSkeleton.vue'
+import TextSkeleton from '@/components/Skeletons/TextSkeleton.vue';
+import RoundedSkeleton from '@/components/Skeletons/RoundedSkeleton.vue';
 
 defineProps({
   name: String,
   img: String,
-  isSkeleton: Boolean
-})
+  isSkeleton: Boolean,
+});
 </script>
 
 <template>

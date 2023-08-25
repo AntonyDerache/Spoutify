@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
-  isPlaying: Boolean
-})
+  isPlaying: Boolean,
+});
 </script>
 
 <template>

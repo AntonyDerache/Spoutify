@@ -2,8 +2,8 @@
 defineProps({
   label: String,
   icon: String,
-  size: { type: String, default: 'md' }
-})
+  size: { type: String, default: 'md' },
+});
 </script>
 
 <template>

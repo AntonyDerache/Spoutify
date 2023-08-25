@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject } from 'vue';
 
-import { Device } from '@/tools/defineDevice'
-import logo from '../assets/logo.svg'
+import { Device } from '@/tools/defineDevice';
+import logo from '../assets/logo.svg';
 
-let device: Device | undefined = inject('device')
+const device: Device | undefined = inject('device');
 </script>
 
 <template>

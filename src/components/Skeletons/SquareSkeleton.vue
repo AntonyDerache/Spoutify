@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
-  borderRadius: { type: String, default: '0' }
-})
+  borderRadius: { type: String, default: '0' },
+});
 </script>
 
 <template>

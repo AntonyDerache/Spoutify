@@ -3,14 +3,14 @@ const props = defineProps({
   icon: String,
   size: { type: String, default: 'md' },
   iconSize: { type: String, default: 'lg' },
-  onClick: Function
-})
+  onClick: Function,
+});
 
 const handleClick = () => {
   if (props.onClick) {
-    props.onClick()
+    props.onClick();
   }
-}
+};
 </script>
 
 <template>

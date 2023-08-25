@@ -1,32 +1,39 @@
 <script setup lang="ts">
-import { ref, type PropType, type Ref, inject, onUnmounted, onMounted } from 'vue'
+import {
+  ref,
+  type PropType,
+  type Ref,
+  inject,
+  onUnmounted,
+  onMounted,
+} from 'vue';
 
-import TrackCard from '@/components/Cards/TrackCard.vue'
-import Button from '@/components/Buttons/Button.vue'
-import type { SearchTrack } from '@/types/Search.types'
-import type { IAudioManager } from '@/tools/audioManager'
+import TrackCard from '@/components/Cards/TrackCard.vue';
+import Button from '@/components/Buttons/Button.vue';
+import type { SearchTrack } from '@/types/search.types';
+import type { IAudioManager } from '@/tools/audioManager';
 
 defineProps({
   tracks: { type: Object as PropType<Array<SearchTrack> | undefined> },
   isLoading: { type: Boolean, required: false, default: false },
-  inputValue: { type: String, required: true, default: '' }
-})
+  inputValue: { type: String, required: true, default: '' },
+});
 
-let currentUrlTrackPlaying: Ref<string> = ref('')
-const audioManager: IAudioManager | undefined = inject('audioManager')
-
-onMounted(() => {
-  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''))
-})
+const currentUrlTrackPlaying: Ref<string> = ref('');
+const audioManager: IAudioManager | undefined = inject('audioManager');
 
 const newTrackIsBeingPlay = (trackUrl: string) => {
-  currentUrlTrackPlaying.value = trackUrl
-}
+  currentUrlTrackPlaying.value = trackUrl;
+};
+
+onMounted(() => {
+  audioManager?.setOnEndedCallback(() => newTrackIsBeingPlay(''));
+});
 
 onUnmounted(() => {
-  audioManager?.pauseAudio()
-  audioManager?.setOnEndedCallback(() => {})
-})
+  audioManager?.pauseAudio();
+  audioManager?.setOnEndedCallback(() => {});
+});
 </script>
 
 <template>
