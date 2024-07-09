@@ -53,7 +53,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="padding-section">
+  <section class="padding-section md:w-4/5 md:m-auto">
     <div v-if="album">
       <ItemPresentation>
         <template v-slot:img>
@@ -95,8 +95,6 @@ onUnmounted(() => {
 .album-tracks {
   border: 1px solid var(--secondary-color);
   border-radius: var(--border-radius-xl);
-  max-width: 80%;
-  margin: auto;
   text-overflow: ellipsis;
   background-color: rgba(58, 28, 93, 0.3);
 

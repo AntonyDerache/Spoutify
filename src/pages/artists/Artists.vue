@@ -62,7 +62,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="padding-section">
+  <section class="padding-section md:w-4/5 md:m-auto">
     <div v-if="artist">
       <ItemPresentation>
         <template v-slot:img>
@@ -75,7 +75,7 @@ onUnmounted(() => {
           </div>
         </template>
       </ItemPresentation>
-      <div class="w-4/5 m-auto">
+      <div>
         <div v-if="artistTopTracks" class="pb-16">
           <p class="text-start text-4xl pb-6">Top Tracks</p>
           <ArtistsTopTracks :tracks="artistTopTracks.tracks" />
