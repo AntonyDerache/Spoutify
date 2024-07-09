@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TrackCard from '@/components/Cards/TrackCard.vue';
+import TrackCard from '@/components/cards/TrackCard.vue';
 import type { SearchTrack } from '@/types/search.types';
 
 defineProps({

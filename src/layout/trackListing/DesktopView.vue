@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue';
 
-import TrackCard from '@/components/Cards/TrackCard.vue';
+import TrackCard from '@/components/cards/TrackCard.vue';
 import type { IAudioManager } from '@/tools/audioManager';
 import type { SearchTrack } from '@/types/search.types';
 

@@ -1,4 +1,4 @@
-# 🎵 Spoutify 🎵 
+# 🎵 Spoutify 🎵
 
 Spoutify is a spotify like web application. It is using the 30s song preview given by the Spotify developers API.
 

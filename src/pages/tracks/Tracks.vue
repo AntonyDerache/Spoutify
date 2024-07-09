@@ -10,8 +10,8 @@ import {
 import { useRoute } from 'vue-router';
 import searchItems from '@/api/searchItems';
 import type { SearchTrack } from '@/types/search.types';
-import TrackCard from '@/components/Cards/TrackCard.vue';
-import Input from '@/components/Input/Input.vue';
+import TrackCard from '@/components/cards/TrackCard.vue';
+import Input from '@/components/input/Input.vue';
 import type { IAudioManager } from '@/tools/audioManager';
 
 const audioManager: IAudioManager | undefined = inject('audioManager');
