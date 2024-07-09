@@ -33,12 +33,8 @@ defineProps({
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-
-  @media (min-width: 768px) {
-    justify-content: flex-start;
-  }
 }
 
 .artist-frame {

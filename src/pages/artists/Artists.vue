@@ -66,7 +66,9 @@ onUnmounted(() => {
     <div v-if="artist">
       <ItemPresentation>
         <template v-slot:img>
-          <img :src="artist.images[2].url" />
+          <div class="cover overflow-hidden flex items-center">
+            <img :src="artist.images[2].url" :alt="`${artist.name} profile picture`" />
+          </div>
         </template>
         <template v-slot:text>
           <div>
@@ -98,9 +100,13 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
-img {
+.cover {
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
+
+  img {
+    width: 100%;
+  }
 }
 </style>

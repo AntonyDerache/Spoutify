@@ -33,11 +33,7 @@ defineProps({
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-content: center;
-
-  @media (min-width: 768px) {
-    justify-content: flex-start;
-  }
+  justify-content: flex-start;
 
   .album-frame {
     width: 10rem;

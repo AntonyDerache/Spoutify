@@ -35,7 +35,7 @@ watch(inputValue, async (newV, oldV) => {
 
 <template>
   <section
-    :class="`flex gap-6 justify-center items-center flex-col padding-section ${
+    :class="`flex gap-6 justify-center items-center flex-col padding-section md:w-4/5 md:m-auto ${
       inputValue === '' ? 'section-centered' : ''
     }`"
   >

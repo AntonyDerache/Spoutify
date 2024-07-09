@@ -11,7 +11,9 @@ defineProps({
 
 <template>
   <div v-if="!isSkeleton" class="artist-thumbnail">
-    <img :src="img" :alt="`${name}'s' spotify profile picture`" class="cover" />
+    <div class="cover overflow-hidden flex items-center">
+      <img :src="img" :alt="`${name}'s' spotify profile picture`" />
+    </div>
     <p>{{ name }}</p>
   </div>
   <div v-else class="artist-thumbnail skeleton">
