@@ -16,7 +16,7 @@ import ProgressBar from '@/components/progressBar/ProgressBar.vue';
 
 const props = defineProps({
   track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },
-  albumCover: String,
+  albumCover: String || undefined,
   currentUrlTrackPlaying: { type: String, required: true },
   setCurrentUrlTrackPlaying: { type: Function, required: true },
 });

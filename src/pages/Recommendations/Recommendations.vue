@@ -50,7 +50,10 @@ const goToRecommendations = () => {
 </script>
 
 <template>
-  <section class="w-full flex justify-center items-center flex-col padding-section">
+  <section
+    class="w-full flex justify-center items-center flex-col padding-section"
+    data-testid="recommendations-genres-page"
+  >
     <div class="input-container">
       <Input v-model:value="inputValue" placeholder="Find a genre" />
     </div>
@@ -59,6 +62,7 @@ const goToRecommendations = () => {
         v-if="selectedGenres.length > 0"
         class="white-color"
         icon="paper-plane"
+        data-testid="generate-recommendations-btn"
         @click="goToRecommendations"
       />
       <div v-for="selectedGenre in selectedGenres" :key="selectedGenre">
@@ -68,7 +72,7 @@ const goToRecommendations = () => {
     <div v-if="genres.length === 0" class="absolute top-1/2">
       <p class="text-2xl">There is no matching genres</p>
     </div>
-    <ul class="w-full justify-center">
+    <ul class="w-full justify-center" data-testid="recommendations-genres">
       <li v-for="genre in genres" :key="genre" class="flex justify-center">
         <Card
           :label="genre"

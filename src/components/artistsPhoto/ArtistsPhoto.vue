@@ -4,7 +4,7 @@ import RoundedSkeleton from '@/components/skeletons/RoundedSkeleton.vue';
 
 defineProps({
   name: String,
-  img: String,
+  img: String || undefined,
   isSkeleton: Boolean,
 });
 </script>

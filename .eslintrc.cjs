@@ -17,7 +17,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
-    'import/no-extraneous-dependencies': ['error', { devDependencies: false }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-plusplus': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'no-unused-vars': 'off',

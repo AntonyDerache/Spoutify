@@ -52,15 +52,15 @@ onUnmounted(() => {
 
 <template>
   <section class="padding-section flex gap-6 items-center justify-center flex-col">
-    <div class="input-container">
+    <div class="input-container" data-testid="tracks-page-input">
       <Input v-model:value="inputValue" placeholder="Find a track" />
     </div>
     <div v-if="tracks?.length === 0" class="absolute top-1/2">
       <p class="text-2xl">There is no matches</p>
     </div>
     <div v-if="inputValue.length > 0" class="w-full justify-center">
-      <ul v-if="!isLoading">
-        <li v-for="track in tracks" :key="track.name" class="flex justify-center">
+      <ul v-if="!isLoading" data-testid="tracks-list">
+        <li v-for="track in tracks" :key="track.id" class="flex justify-center">
           <TrackCard
             :track="track"
             :currentUrlTrackPlaying="currentUrlTrackPlaying"

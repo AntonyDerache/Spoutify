@@ -14,6 +14,7 @@ defineEmits(['update:value']);
     @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
     :placeholder="placeholder"
     autocomplete="on"
+    data-testid="search-input"
   />
 </template>
 

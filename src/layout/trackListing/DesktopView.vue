@@ -84,7 +84,11 @@ const prevTrack = () => {
       <div id="left-ghost-track" class="ghost-track left">
         <TrackCard v-if="currentTrackIndex > 0" :track="tracks[currentTrackIndex - 1]" />
       </div>
-      <div id="current-track" :class="`track ${audioManager?.isPlaying ? '' : ''}`">
+      <div
+        id="current-track"
+        :class="`track ${audioManager?.isPlaying ? '' : ''}`"
+        data-testid="current-track"
+      >
         <TrackCard
           :track="tracks[currentTrackIndex]"
           :currentUrlTrackPlaying="currentUrlTrackPlaying"

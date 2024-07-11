@@ -34,7 +34,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 top-tracks p-4">
+  <div class="flex flex-col gap-2 top-tracks p-4" data-testid="artist-top-tracks">
     <div
       v-for="track in showMore ? tracks : tracks.slice(0, 5)"
       :key="track.id"
@@ -42,7 +42,7 @@ onUnmounted(() => {
     >
       <TrackRow
         :track="track"
-        :albumCover="track.album.images[1].url"
+        :albumCover="track.album.images[1]?.url"
         :currentUrlTrackPlaying="currentUrlTrackPlaying"
         :setCurrentUrlTrackPlaying="newTrackIsBeingPlay"
       />

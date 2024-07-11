@@ -58,15 +58,21 @@ onUnmounted(() => {
       <ItemPresentation>
         <template v-slot:img>
           <img
-            :src="album.images[1].url"
+            :src="album.images[1]?.url"
             :alt="`${album.name}'s cover`"
             :class="`${currentUrlTrackPlaying !== '' ? ' box-shadow' : ''}`"
           />
         </template>
         <template v-slot:text>
-          <h2 class="text-4xl text-start font-bold">{{ album.name }}</h2>
+          <h2
+            class="text-4xl text-start font-bold"
+            :data-testid="`${album?.name}-album-name`"
+          >
+            {{ album.name }}
+          </h2>
           <h3
             class="text-1xl text-start font-bold hover:underline cursor-pointer"
+            :data-testid="`${album?.artists[0].name}-album-artist`"
             @click="() => $router.push(`/artists/${album?.artists[0].id}`)"
           >
             {{ album.artists[0].name }}

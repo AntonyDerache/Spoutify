@@ -13,10 +13,15 @@ defineProps({
 <template>
   <p class="text-4xl font-bold p-4">Artists</p>
   <div v-if="!isLoading && artists" class="artists-list">
-    <div v-for="artist in artists.slice(0, 5)" :key="artist.name" class="artist-frame">
+    <div
+      v-for="artist in artists.slice(0, 5)"
+      :key="artist.name"
+      class="artist-frame"
+    >
       <ArtistPhoto
         :name="artist.name"
         :img="artist.images[1]?.url"
+        :data-testid="`${artist.name}-search-artist-item`"
         @click="() => $router.push(`/artists/${artist.id}`)"
       />
     </div>

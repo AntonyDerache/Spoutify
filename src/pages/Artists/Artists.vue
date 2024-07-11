@@ -58,7 +58,6 @@ onUnmounted(() => {
   audioManager.pauseAudio();
   audioManager.setOnEndedCallback(() => { });
 });
-
 </script>
 
 <template>
@@ -67,12 +66,15 @@ onUnmounted(() => {
       <ItemPresentation>
         <template v-slot:img>
           <div class="cover overflow-hidden flex items-center">
-            <img :src="artist.images[2].url" :alt="`${artist.name} profile picture`" />
+            <img
+              :src="artist.images[2]?.url"
+              :alt="`${artist.name} profile picture`"
+            />
           </div>
         </template>
         <template v-slot:text>
           <div>
-            <h1 class="text-5xl">{{ artist.name }}</h1>
+            <h1 class="text-5xl" :data-testid="`${artist.name}-artist-name`">{{ artist.name }}</h1>
             <h3 class="text-md">{{ largeNumberToString(artist.followers.total) }} Followers</h3>
           </div>
         </template>
@@ -80,18 +82,23 @@ onUnmounted(() => {
       <div>
         <div v-if="artistTopTracks" class="pb-16">
           <p class="text-start text-4xl pb-6">Top Tracks</p>
-          <ArtistsTopTracks :tracks="artistTopTracks.tracks" />
+          <ArtistsTopTracks :tracks="artistTopTracks.tracks"/>
         </div>
         <div v-if="artistAlbums">
-          <div class="flex flex-col gap-10">
-            <ArtistsAlbums
+          <div>
+            <div class="flex flex-col gap-10"
               v-if="albumsList && albumsList.length > 0"
-              :albums="albumsList" title="Albums"
-            />
-            <ArtistsAlbums
+              data-testid="artist-albums"
+            >
+              <ArtistsAlbums :albums="albumsList" title="Albums"/>
+            </div>
+            <div
               v-if="singlesList && singlesList.length > 0"
-              :albums="singlesList" title="Singles"
-            />
+              class="flex flex-col gap-10"
+              data-testid="artist-singles"
+            >
+              <ArtistsAlbums :albums="singlesList" title="Singles"/>
+            </div>
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ watch(inputValue, async (newV, oldV) => {
       inputValue === '' ? 'section-centered' : ''
     }`"
   >
-    <div class="input-container">
+    <div class="input-container" data-testid="home-page-input">
       <Input v-model:value="inputValue" placeholder="Find anything..." />
     </div>
     <div
@@ -50,7 +50,6 @@ watch(inputValue, async (newV, oldV) => {
       <Button
         label="Recommendations"
         size=""
-        @click="() => $router.push('/recommendations')"
       ></Button>
     </div>
     <div v-if="inputValue.length > 0" class="flex flex-col gap-6">

@@ -17,10 +17,11 @@ const showMore = ref(false);
       v-for="album in showMore ? albums : albums.slice(0, 6)"
       :key="album.id"
       class="cursor-pointer"
+      :data-testid="`${album.name}-album`"
       @click="() => $router.push(`/albums/${album.id}`)"
     >
       <div class="flex flex-col gap-4 items-center">
-        <img :src="album.images[1].url" />
+        <img :src="album.images[1]?.url" />
         <p class="text-md">{{ album.name }}</p>
       </div>
     </li>

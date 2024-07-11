@@ -17,12 +17,13 @@ defineProps({
       <AlbumCard
         :name="album.name"
         :coverURL="album.images[1]?.url"
+        :data-testid="`${album.name}-search-album-item`"
         @click="() => $router.push(`/albums/${album.id}`)"
       />
     </div>
   </div>
   <div v-else class="albums-list">
-    <div v-for="item in new Array(5)" :key="item" class="album-frame">
+    <div v-for="item in new Array(5)" :key="`skeleton-${item}`" class="album-frame">
       <AlbumCard isSkeleton />
     </div>
   </div>

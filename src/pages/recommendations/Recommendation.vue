@@ -43,13 +43,18 @@ const onNewTrackSelected = (index: number) => {
 </script>
 
 <template>
-  <section>
+  <section data-testid="recommendation-page">
     <div v-if="device !== Device.Mobile">
       <Modal :isOpen="isTracklistModalOpen" :onClose="closeTracklistModal">
         <TracklistModalContent :tracks="tracks" :currentTrackIndex="currentTrackIndex" />
       </Modal>
       <div class="flex justify-center pt-10">
-        <Button label="See tacklist" class="cursor-pointer" @click="openTracklistModal" />
+        <Button
+          label="See tacklist"
+          class="cursor-pointer"
+          data-testid="tracklist-btn"
+          @click="openTracklistModal"
+        />
       </div>
     </div>
     <TracksListing :tracks="tracks" @newTrackSelected="onNewTrackSelected" />
