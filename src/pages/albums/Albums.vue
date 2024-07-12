@@ -13,7 +13,7 @@ import getAlbums from '@/api/getAlbums';
 import type { Album, AlbumTrack } from './album.types';
 import TrackRow from './TrackRow.vue';
 import type { IAudioManager } from '@/tools/audioManager';
-import millisecondsToMinutesAndSeconds from '@/tools/millisecondsToMinutesAndSecdonds';
+import millisecondsToMinutesAndSeconds from '@/tools/millisecondsToMinutesAndSeconds';
 import ItemPresentation from '@/layout/ItemPresentation.vue';
 
 const audioManager: IAudioManager | undefined = inject('audioManager');

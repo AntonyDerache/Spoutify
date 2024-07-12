@@ -3,7 +3,7 @@ import { BASE_URL, RECOMMENDATIONS } from '../../constant';
 import buildQueryParameters from './setupAxios';
 
 export default async (seedType: string, genres: string) => {
-  if ((seedType.length === 0, genres.length === 0)) {
+  if (seedType.length === 0 || genres.length === 0) {
     return null;
   }
   const queryParams = {

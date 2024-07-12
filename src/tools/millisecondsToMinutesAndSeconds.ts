@@ -1,4 +1,4 @@
-export default (millis: number) => {
+export default (millis: number): string => {
   let minutes: number = Math.floor(millis / 60000);
   const seconds = Number.parseFloat(((millis % 60000) / 1000).toFixed(0));
 
