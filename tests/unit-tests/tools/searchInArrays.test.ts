@@ -24,5 +24,5 @@ test.each([
 });
 
 test('test ci', () => {
-  expect(false).toBeFalsy();
+  expect(false).toBeTruthy();
 });
