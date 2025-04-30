@@ -22,7 +22,3 @@ test.each([
   // THEN
   expect(result).toStrictEqual(expected);
 });
-
-test('test ci', () => {
-  expect(false).toBeFalsy();
-});
