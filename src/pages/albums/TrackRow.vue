@@ -8,11 +8,11 @@ import {
 
 import PlayButton from '@/components/playButton/PlayButton.vue';
 import IconButton from '@/components/buttons/IconButton.vue';
+import ProgressBar from '@/components/progressBar/ProgressBar.vue';
 import type { IAudioManager } from '@/tools/audioManager';
 import millisecondsToMinutesAndSeconds from '@/tools/millisecondsToMinutesAndSeconds';
 import type { SearchTrack } from '@/types/search.types';
 import type { AlbumTrack } from './album.types';
-import ProgressBar from '@/components/progressBar/ProgressBar.vue';
 
 const props = defineProps({
   track: { type: Object as PropType<AlbumTrack | SearchTrack>, required: true },

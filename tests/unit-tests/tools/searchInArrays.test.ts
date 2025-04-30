@@ -12,7 +12,7 @@ test.each([
     arr: ['alternance', 'Alternative', 'Altitude', 'tutU', 'tAta'],
     expected: ['alternance', 'Alternative', 'Altitude'],
   },
-])('Find elements in an array regardless of case sensitivity ', (entry) => {
+])('Find elements in an array regardless of case sensitivity', (entry) => {
   // GIVEN
   const { value, arr, expected } = entry;
 

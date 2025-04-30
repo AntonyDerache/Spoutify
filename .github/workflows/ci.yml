@@ -22,3 +22,6 @@ jobs:
 
       - name: Run Vitest tests
         run: yarn run test:unit
+
+      - name: Run ESLint
+        run: npm run lint
