@@ -10,7 +10,7 @@ test.each([
     value: 39000.43,
     expected: '0:39',
   },
-])("$value equals $expected seconds", (entry) => {
+])('$value equals $expected seconds', (entry) => {
   // GIVEN
   const { value, expected } = entry;
 
